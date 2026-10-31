@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Working files. These are in the folder for history, not for the public, and
+# they should not be uploaded at all. The rules below are a second line of
+# defence in case they are.
+Disallow: /index-before-
+Disallow: /index-previous.html
+Disallow: /brief-adonais-way-website.html
+Disallow: /halcyon-night/
+Disallow: /mirror-hall/
+Disallow: /ui-ux-pro-max/
+Disallow: /_capture.html
+
+Sitemap: https://adonaisway.org/sitemap.xml

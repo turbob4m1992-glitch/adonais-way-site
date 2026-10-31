@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 1120" role="img" aria-label="Adonai&apos;s Way">
+<style>
+  /* Two supplied colourways, not a fifth: Still Ground on a light tab strip,
+     Daybreak reverse on a dark one. Geometry is the symbol master, untouched. */
+  .m { stroke: #2E3A34 }
+  @media (prefers-color-scheme: dark) { .m { stroke: #F4EDE1 } }
+</style>
+<g transform="translate(560 966) scale(1 -1)">
+<path class="m" d="M -175 0 L -175 361.2 M -175 408.8 L -175 637 A 175 175 0 0 0 175 637 L 175 408.8 M 175 361.2 L 175 0" fill="none" stroke-width="47.3" stroke-linecap="butt" stroke-linejoin="miter"/>
+</g>
+</svg>

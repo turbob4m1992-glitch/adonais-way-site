@@ -1,0 +1,2346 @@
+<!doctype html>
+<html lang="en" data-theme="dusk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Adonai&rsquo;s Way Foundation | A channel for light</title>
+<meta name="description" content="Giving is easy. Knowing where is not. We check every charity ourselves: registration, three years of accounts, programme evidence, safeguarding. Seven causes, thirteen partners, and all of your gift reaches the one you choose.">
+<meta name="theme-color" content="#17131C">
+<meta property="og:title" content="Adonai&rsquo;s Way Foundation">
+<meta property="og:description" content="Giving is easy. Knowing where is not. We check every charity ourselves, so your giving lands where it should.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://adonaisway.org/">
+<meta property="og:image" content="https://adonaisway.org/assets/hero-wetland-dusk.jpg">
+<meta property="og:image:width" content="2752">
+<meta property="og:image:height" content="1536">
+<meta property="og:image:alt" content="A weathered wooden boardwalk running out over a Florida wetland to a viewing platform at sunset.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://adonaisway.org/">
+
+<!-- The identity ships subset woff2 for all three families. They are served from
+     this origin, so no request leaves the visitor's browser: faster, and better
+     for privacy. Brand guidelines, sheet 11. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/jost-300.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/karla-400.woff2" crossorigin>
+<link rel="preload" as="image" type="image/webp" fetchpriority="high" imagesizes="100vw"
+      imagesrcset="assets/hero-wetland-dusk-900.webp 900w, assets/hero-wetland-dusk-1600.webp 1600w, assets/hero-wetland-dusk.webp 2752w">
+
+<!-- The symbol is the favicon. The 16 and 32 px PNGs are the separately drawn
+     optical versions from the identity folder, not the symbol scaled down.
+     Brand guidelines, sheet 06. -->
+<link rel="icon" href="assets/favicon/favicon-adaptive.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/favicon/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="assets/favicon/favicon-180.png">
+<link rel="manifest" href="site.webmanifest">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "name": "Adonai's Way Foundation",
+  "alternateName": "Adonai's Way",
+  "url": "https://adonaisway.org/",
+  "description": "A grant-making foundation that selects, vets and funds charities working across homelessness, children's education, brain and neurological research, veterans, survivors of trauma and abuse, psychedelic research, and animals and conservation. It does not run programmes of its own.",
+  "slogan": "A channel for light",
+  "founder": { "@type": "Person", "name": "Margaux Primat", "jobTitle": "Founder", "image": "https://adonaisway.org/assets/founder-margaux.jpg" },
+  "knowsAbout": [
+    "Homelessness", "Children's education", "Brain and neurological research",
+    "Veterans", "Survivors of trauma and abuse", "Psychedelic research",
+    "Animals and conservation"
+  ],
+  "contactPoint": [{
+    "@type": "ContactPoint", "contactType": "donations",
+    "email": "hello@adonaisway.org", "availableLanguage": "English"
+  }]
+}
+</script>
+
+<script>
+  /* runs before first paint so a remembered choice never flashes the other light first.
+     ?theme=day / ?theme=dusk in the address overrides, which is handy for review links. */
+  document.documentElement.classList.add('js');
+  try{
+    var q = new URLSearchParams(location.search).get('theme');
+    var t = (q === 'day' || q === 'dusk') ? q : localStorage.getItem('adonai:light');
+    if (t === 'day' || t === 'dusk') document.documentElement.setAttribute('data-theme', t);
+  }catch(e){}
+</script>
+
+<style>
+/* ============================================================
+   ADONAI'S WAY FOUNDATION
+   Hand-coded HTML, CSS and one WebGL shader. No framework, no
+   build step, no third-party script and no third-party request.
+
+   Built to Adonai's Way Brand Guidelines, version 1.0, September
+   2026. Sheet numbers in the comments below point at that document.
+
+   THE PALETTE, sheet 08. Six colours, and there is no seventh.
+     Still Ground #2E3A34   primary ink, and dark grounds
+     Deep Water   #4A6155   secondary ink, and section grounds
+     Reed         #8FA292   rules and quiet states. Never text.
+     Stone        #C8C2B4   borders, and paper texture
+     Daybreak     #F4EDE1   page ground, and ink reversed out
+     First Light  #DFA45C   the symbol, and one call to action
+
+   THE TYPE, sheet 10.
+     Jost 300 / 400    display and headings
+     Karla 400 / 700   all running text and every interface label
+     EB Garamond 400i  pull quotes only, where someone is quoted
+
+   The site is one passage from dusk to day, and both ends are
+   built to be read: day stands on Daybreak, and dusk goes down into
+   the plum and ember of the sky in the photograph. The dusk grounds
+   are the one place the site steps outside the six colours of sheet
+   08, by the client's choice, because the evening should feel like
+   the evening it comes from.
+============================================================ */
+:root{
+  /* the six, named the way the guidelines name them */
+  --c-ground:#2E3A34; --c-deep:#4A6155;     --c-reed:#8FA292;
+  --c-stone:#C8C2B4;  --c-daybreak:#F4EDE1; --c-first:#DFA45C;
+
+  /* older aliases the shader and the photographic walls still read */
+  --ground:var(--c-ground); --daybreak:var(--c-daybreak); --first:var(--c-first);
+  --deep:var(--c-deep); --reed:var(--c-reed); --stone:var(--c-stone);
+
+  /* one scale, so nothing is ever nudged upward by guesswork */
+  --z-nature:1; --z-content:2; --z-scrim:3; --z-hero-copy:5; --z-nav:90; --z-panel:95; --z-skip:200;
+
+  --shell: min(1200px, 90vw);
+  --gutter: clamp(20px, 5vw, 64px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --slow:1.8s;
+  /* the page moves slowly on purpose, but a hover is a reply and a reply
+     should not take half a second. Everything under the pointer uses this. */
+  --tap:.2s;
+
+  /* ---- the three families, self-hosted, sheet 10 ---- */
+  --display:'Jost', 'Futura', 'Avenir Next', system-ui, sans-serif;
+  --body:'Karla', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --quote:'EB Garamond', Georgia, 'Times New Roman', serif;
+
+  /* ---- the scale, sheet 10, each clamp landing exactly on the
+     published size at full width ---- */
+  --t-display:clamp(40px, 5.4vw, 64px);   /* Jost 300  64 / 1.04 / -0.01em */
+  --t-h1:clamp(31px, 3.7vw, 44px);        /* Jost 300  44 / 1.10 / -0.01em */
+  --t-h2:clamp(25px, 2.8vw, 32px);        /* Jost 400  32 / 1.15 */
+  --t-h3:clamp(20px, 2.0vw, 24px);        /* Jost 400  24 / 1.25 */
+  --t-body:17px;                          /* Karla 400 17 / 1.65 */
+  --t-small:14px;                         /* Karla 400 14 / 1.55, the floor */
+  --t-label:11.5px;                       /* Karla 700 11.5 / 1.4 / 0.20em */
+  --t-quote:22px;                         /* EB Garamond italic 22 / 1.45 */
+  /* the two photographic walls are not a document column, so the quote and
+     the headline are set there at display scale. Everywhere else the sheet
+     10 sizes are used as printed. */
+  --t-quote-wall:clamp(27px, 3.6vw, 52px);
+}
+
+/* ------------------------------------------------------------
+   THE TYPEFACES
+
+   Subset woff2 from the identity folder, served from this origin.
+   Karla ships 400 and 700 only, which is the whole of what the
+   guidelines ask for: 400 carries every line of running text and
+   700 carries the labels. There is no 300, and body text is not
+   set light.
+------------------------------------------------------------ */
+@font-face{ font-family:'Jost'; font-style:normal; font-weight:300; font-display:swap;
+  src:url('assets/fonts/jost-300.woff2') format('woff2'); }
+@font-face{ font-family:'Jost'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('assets/fonts/jost-400.woff2') format('woff2'); }
+@font-face{ font-family:'Karla'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('assets/fonts/karla-400.woff2') format('woff2'); }
+@font-face{ font-family:'Karla'; font-style:normal; font-weight:700; font-display:swap;
+  src:url('assets/fonts/karla-700.woff2') format('woff2'); }
+@font-face{ font-family:'EB Garamond'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('assets/fonts/ebgaramond-400.woff2') format('woff2'); }
+@font-face{ font-family:'EB Garamond'; font-style:italic; font-weight:400; font-display:swap;
+  src:url('assets/fonts/ebgaramond-400-italic.woff2') format('woff2'); }
+
+/* ------------------------------------------------------------
+   THE TWO LIGHTS
+
+   Turning the light is nothing but a change of colour, so every
+   colour that moves is registered with @property. A registered
+   custom property can be interpolated, which means ONE transition
+   declared on :root carries the entire page from dusk to day.
+   The page used to do this by putting a transition on every element
+   and every pseudo-element; that ran thousands of animations on the
+   main thread while the hero shader was trying to hold 60fps, and
+   the sun stuttered for it. This costs 25.
+------------------------------------------------------------ */
+@property --paper       { syntax:'<color>'; inherits:true; initial-value:#17131C }
+@property --paper-2     { syntax:'<color>'; inherits:true; initial-value:#1F1826 }
+@property --paper-3     { syntax:'<color>'; inherits:true; initial-value:#261D2D }
+@property --ink         { syntax:'<color>'; inherits:true; initial-value:#F4EDE1 }
+@property --ink-2       { syntax:'<color>'; inherits:true; initial-value:#C6B6A6 }
+@property --hair        { syntax:'<color>'; inherits:true; initial-value:rgba(244,237,225,.16) }
+@property --edge        { syntax:'<color>'; inherits:true; initial-value:rgba(244,237,225,.14) }
+@property --accent      { syntax:'<color>'; inherits:true; initial-value:#DFA45C }
+@property --accent-soft { syntax:'<color>'; inherits:true; initial-value:rgba(223,164,92,.14) }
+@property --halo        { syntax:'<color>'; inherits:true; initial-value:rgba(23,19,28,.95) }
+@property --sheen       { syntax:'<color>'; inherits:true; initial-value:rgba(255,206,150,.13) }
+@property --frost       { syntax:'<color>'; inherits:true; initial-value:rgba(255,236,214,.07) }
+@property --warn        { syntax:'<color>'; inherits:true; initial-value:#E58A6E }
+@property --logo-ink    { syntax:'<color>'; inherits:true; initial-value:#F4EDE1 }
+@property --btn-ink     { syntax:'<color>'; inherits:true; initial-value:#17131C }
+@property --nav-bg      { syntax:'<color>'; inherits:true; initial-value:rgba(23,19,28,.88) }
+/* The navigation over the photograph. At dusk the frame is dark enough to
+   carry Daybreak type straight on the picture, which is what sheet 12 shows.
+   The day frame is not: its sky sits at a mid luminance where neither ink
+   works, measured at 1.9:1 for Daybreak and 2.8:1 for Still Ground. So in
+   day the bar takes a ground of its own, and the photograph underneath is
+   left alone rather than stained dark enough to rescue the type. */
+@property --nav-hero-bg { syntax:'<color>'; inherits:true; initial-value:rgba(23,19,28,0) }
+@property --nav-ink     { syntax:'<color>'; inherits:true; initial-value:#F4EDE1 }
+@property --nav-edge    { syntax:'<color>'; inherits:true; initial-value:rgba(244,237,225,.55) }
+@property --nav-line    { syntax:'<color>'; inherits:true; initial-value:rgba(244,237,225,.14) }
+@property --shade       { syntax:'<color>'; inherits:true; initial-value:rgba(10,7,12,.55) }
+@property --plate-1     { syntax:'<color>'; inherits:true; initial-value:#241A2A }
+@property --plate-2     { syntax:'<color>'; inherits:true; initial-value:#35202B }
+@property --plate-3     { syntax:'<color>'; inherits:true; initial-value:#43272A }
+@property --leaf        { syntax:'<color>'; inherits:true; initial-value:#43384B }
+@property --leaf-2      { syntax:'<color>'; inherits:true; initial-value:#6A4A34 }
+@property --veil        { syntax:'<color>'; inherits:true; initial-value:rgba(46,58,52,.46) }
+/* the four stops of the scrim under the hero copy. They are registered so the
+   wash travels with the light rather than snapping at the halfway point, and
+   they differ per theme because the two photographs are not equally bright:
+   measured against the day frame the copy needed nearly twice the cover it
+   needs at dusk. */
+@property --sb-0        { syntax:'<color>'; inherits:true; initial-value:rgba(46,58,52,.90) }
+@property --sb-1        { syntax:'<color>'; inherits:true; initial-value:rgba(46,58,52,.635) }
+@property --sb-2        { syntax:'<color>'; inherits:true; initial-value:rgba(46,58,52,.335) }
+@property --sb-3        { syntax:'<color>'; inherits:true; initial-value:rgba(46,58,52,.075) }
+/* the wall behind the founder's line. Same story as the hero: the day frame
+   is far brighter than the dusk one, so it carries a heavier scrim, and the
+   two travel rather than snap. */
+@property --st-0        { syntax:'<color>'; inherits:true; initial-value:rgba(46,58,52,.64) }
+@property --st-1        { syntax:'<color>'; inherits:true; initial-value:rgba(46,58,52,.52) }
+@property --st-2        { syntax:'<color>'; inherits:true; initial-value:rgba(46,58,52,.78) }
+
+/* ---------- DUSK: the page goes down with the sun. The grounds are pulled
+   from the photograph itself, plum at the top of the sky through ember at the
+   waterline, and the type comes back up in Daybreak and a warm stone. First
+   Light carries the labels here, where it measures well above AA. These
+   grounds are outside sheet 08's six by the client's choice. The scrims over
+   the photographs are left as they were measured. ---------- */
+:root, [data-theme="dusk"]{
+  color-scheme:dark;
+  --paper:#17131C; --paper-2:#1F1826; --paper-3:#261D2D;
+  --ink:#F4EDE1;   --ink-2:#C6B6A6;
+  --hair:rgba(244,237,225,.16);
+  --edge:rgba(244,237,225,.14);
+  --accent:#DFA45C; --accent-soft:rgba(223,164,92,.14);
+  --warn:#E58A6E;  --halo:rgba(23,19,28,.95);
+  --logo-ink:#F4EDE1;
+  --btn-ink:#17131C;
+  --nav-bg:rgba(23,19,28,.88); --nav-line:rgba(244,237,225,.14);
+  --nav-hero-bg:rgba(23,19,28,0); --nav-ink:#F4EDE1; --nav-edge:rgba(244,237,225,.55);
+  --shade:rgba(10,7,12,.55);
+  --plate-1:#241A2A; --plate-2:#35202B; --plate-3:#43272A;
+  --sheen:rgba(255,206,150,.13); --frost:rgba(255,236,214,.07);
+  --leaf:#43384B; --leaf-2:#6A4A34; --leaf-a:1;
+  --veil:rgba(46,58,52,.40);
+  --sb-0:rgba(46,58,52,.83); --sb-1:rgba(46,58,52,.55); --sb-2:rgba(46,58,52,.30); --sb-3:rgba(46,58,52,.10);
+  --st-0:rgba(46,58,52,.64); --st-1:rgba(46,58,52,.52); --st-2:rgba(46,58,52,.78);
+  --hero-fallback:linear-gradient(180deg,#221733 0%,#6E2A44 34%,#C05A2E 56%,#2E3A2E 74%,#17131C 100%);
+}
+/* ---------- DAY: Daybreak paper, Still Ground ink, Deep Water second.
+   Not white: sheet 09 says no pure white ground anywhere on this site. ---------- */
+[data-theme="day"]{
+  color-scheme:light;
+  --paper:#F4EDE1; --paper-2:#EBE4D8; --paper-3:#E2DCCF;
+  --ink:#2E3A34;   --ink-2:#4A6155;
+  --hair:rgba(143,162,146,.62);
+  --edge:#C8C2B4;
+  --accent:#4A6155; --accent-soft:rgba(74,97,85,.1);
+  --warn:#8C4634;  --halo:rgba(244,237,225,.95);
+  --logo-ink:#2E3A34;
+  --btn-ink:#F4EDE1;
+  --nav-bg:rgba(244,237,225,.88); --nav-line:rgba(74,97,85,.16);
+  --nav-hero-bg:rgba(244,237,225,0); --nav-ink:#2E3A34; --nav-edge:rgba(46,58,52,.34);
+  --shade:rgba(46,58,52,.13);
+  --plate-1:#F4EDE1; --plate-2:#EBE4D8; --plate-3:#E2DCCF;
+  --sheen:rgba(244,237,225,.55); --frost:rgba(244,237,225,.45);
+  /* Reed and Stone, and quiet: on Daybreak paper these read as smudges long
+     before they read as marsh, so the day carries them at just over half */
+  --leaf:#8FA292; --leaf-2:#C8C2B4; --leaf-a:.55;
+  /* The wetland's day frame has the darker foreground the old high-key frame
+     lacked: marsh grass under the copy, with only the weathered rail of the
+     boardwalk running pale through it. That rail is what the day wash is
+     sized for. What the day type measures against this frame is written next
+     to --scrim-copy below. */
+  --veil:rgba(46,58,52,.50);
+  --sb-0:rgba(46,58,52,.86); --sb-1:rgba(46,58,52,.62); --sb-2:rgba(46,58,52,.38); --sb-3:rgba(46,58,52,.14);
+  --st-0:rgba(46,58,52,.70); --st-1:rgba(46,58,52,.58); --st-2:rgba(46,58,52,.80);
+  --hero-fallback:linear-gradient(180deg,#8FA292 0%,#C8C2B4 40%,#F4EDE1 58%,#4A6155 78%,#2E3A34 100%);
+}
+
+/* the composites are written once and re-read as their colours travel */
+:root{
+  --shadow:0 24px 60px var(--shade);
+  --plate:linear-gradient(160deg, var(--plate-1) 0%, var(--plate-2) 55%, var(--plate-3) 100%);
+  /* ---- THE SCRIM UNDER THE COPY ----
+     Every layer here is Still Ground at an alpha, because type over a
+     photograph on this brand is always Daybreak on Still Ground, sheet 12.
+
+     The shape matters more than the strength. The copy is a column down the
+     left, so the wash is a column down the left: narrow enough that it has
+     died before the sun, tall enough to reach the label at the top of the
+     stack. An earlier pass used a wide soft ellipse instead, which is the
+     same thing as a filter over the whole frame: it put 47% cover on the sun
+     and 57% on the middle of the picture to win contrast in one corner. The
+     photograph is the argument this page is making. It does not get veiled
+     to save a scrim.
+
+     The alphas are measured, not eyed. Both frames were sampled inside the
+     real line boxes of the headline and the sentence, and raised until the
+     5th percentile behind each cleared its threshold: 3:1 for the headline,
+     which is large text, and 4.5:1 for the sentence. Measured against the
+     wetland frames, worst case across the window sizes checked (1920x1080,
+     1440x900, 1280x720, 820x1180, 430x926, 430x780) is 3.2 for the
+     headline, in day on a phone, and 4.6 for the sentence, at 430x926 in
+     day. Dusk's worst is 3.3, at 1280x720.
+
+     This frame sets its sun in the middle, not at the right edge, so the
+     column cannot die before it: at 1440x900 the sun keeps about 15% cover
+     at dusk and 19% in day. A short window is the hard one, because there
+     the headline rises to the treeline and over the glow itself. */
+  --scrim-copy:radial-gradient(ellipse 56% 106% at 22% 70%, var(--veil), transparent 100%);
+  /* a short vignette under the navigation, measured in pixels because the
+     bar is a fixed height. It used to run to 38% of the window, which put a
+     grey band a third of the way down the sky for no legibility gain once
+     the day bar took a ground of its own. */
+  --scrim-top:linear-gradient(to bottom, rgba(46,58,52,.34) 0, rgba(46,58,52,.22) 84px, transparent 190px);
+  /* The stops are in pixels, not percentages, because what has to be covered
+     is the copy, and the copy is a fixed number of pixels tall whatever the
+     window is. On a percentage the wash slipped: at 1280x720 the headline
+     climbed above the treeline and out of the top of its own scrim and fell
+     to 2.5:1. In pixels the wash tracks the words, and a taller window simply
+     keeps more clean sky above it. */
+  --scrim-bot:linear-gradient(to top, var(--sb-0) 0, var(--sb-1) 150px, var(--sb-2) 290px, var(--sb-3) 400px, transparent 520px);
+
+  transition:
+    --paper var(--slow) var(--ease), --paper-2 var(--slow) var(--ease), --paper-3 var(--slow) var(--ease),
+    --ink var(--slow) var(--ease), --ink-2 var(--slow) var(--ease),
+    --hair var(--slow) var(--ease), --edge var(--slow) var(--ease),
+    --accent var(--slow) var(--ease), --accent-soft var(--slow) var(--ease),
+    --warn var(--slow) var(--ease),
+    --logo-ink var(--slow) var(--ease), --btn-ink var(--slow) var(--ease),
+    --nav-bg var(--slow) var(--ease), --nav-line var(--slow) var(--ease), --shade var(--slow) var(--ease),
+    --nav-hero-bg var(--slow) var(--ease), --nav-ink var(--slow) var(--ease), --nav-edge var(--slow) var(--ease),
+    --plate-1 var(--slow) var(--ease), --plate-2 var(--slow) var(--ease), --plate-3 var(--slow) var(--ease),
+    --veil var(--slow) var(--ease), --halo var(--slow) var(--ease),
+    --sb-0 var(--slow) var(--ease), --sb-1 var(--slow) var(--ease),
+    --sb-2 var(--slow) var(--ease), --sb-3 var(--slow) var(--ease),
+    --st-0 var(--slow) var(--ease), --st-1 var(--slow) var(--ease), --st-2 var(--slow) var(--ease),
+    --sheen var(--slow) var(--ease), --frost var(--slow) var(--ease);
+}
+
+/* ------------------------------------------------------------
+   THE SAME WASH ON A NARROW SCREEN
+
+   A phone crops this photograph to a tall column down the boardwalk,
+   and the copy runs the full width rather than sitting in a column
+   down the left. So the column-shaped wash is dropped entirely here
+   and the graduated one does all the work, which on a tall frame is
+   the honest shape anyway: light falling down the picture, no blob.
+   Measured at 430x926, 5th percentile behind the glyphs: headline
+   3.3 day and 8.1 dusk against a 3:1 threshold, sentence 4.6 and 7.5
+   against 4.5. The pale deck under the sentence in day is why the
+   day sb-1 matches dusk's. The sun sits at the top edge of the wash,
+   under about 1% cover.
+------------------------------------------------------------ */
+@media (max-width:900px){
+  :root{ --scrim-copy:none; }
+  :root, [data-theme="dusk"]{
+    --sb-0:rgba(46,58,52,.90); --sb-1:rgba(46,58,52,.77);
+    --sb-2:rgba(46,58,52,.56); --sb-3:rgba(46,58,52,.30);
+  }
+  [data-theme="day"]{
+    --sb-0:rgba(46,58,52,.90); --sb-1:rgba(46,58,52,.77);
+    --sb-2:rgba(46,58,52,.52); --sb-3:rgba(46,58,52,.24);
+  }
+  /* the headline runs to three lines here, so the wash reaches further up */
+  :root{ --scrim-bot:linear-gradient(to top, var(--sb-0) 0, var(--sb-1) 170px, var(--sb-2) 320px, var(--sb-3) 430px, transparent 560px); }
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--body); font-weight:400; font-size:var(--t-body); line-height:1.65;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; overflow-x:hidden;
+}
+img,svg,canvas{ display:block; max-width:100%; }
+picture{ display:contents; }
+a{ color:inherit; }
+/* The focus ring has to survive both a sheet of paper and a photograph of a
+   sunset, and no single colour clears 3:1 against both. So it is two rings:
+   an ink core that carries on paper, and a paper halo that carries on the
+   photograph. The gold ring this replaces measured 1.9:1 on paper, which is
+   to say it was decoration rather than an indicator. */
+:focus-visible{ outline:3px solid var(--ink); outline-offset:3px;
+  box-shadow:0 0 0 6px var(--halo); border-radius:3px; }
+::selection{ background:var(--c-first); color:var(--c-ground); }  /* 5.42:1 */
+
+.skip{ position:absolute; left:12px; top:-60px; z-index:var(--z-skip); background:var(--ink); color:var(--paper);
+  padding:13px 20px; transition:top .2s var(--ease); }
+.skip:focus{ top:12px; }
+.vh{ position:absolute!important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden;
+  clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0; }
+
+/* ============================================================
+   TYPE, sheet 10
+
+   Jost carries the headings, Karla carries every word anybody
+   actually reads, and EB Garamond appears only where a person is
+   being quoted. That last rule is the strict one: the accent face
+   is for pull quotes and donor stories, so it turns up exactly
+   twice on this page and nowhere else.
+
+   Headings are sentence case. Full capitals appear in the
+   logotype and in labels, and nowhere else on the site.
+============================================================ */
+h1,h2,h3,h4{ font-family:var(--display); margin:0; }
+h1{ font-weight:300; font-size:var(--t-display); line-height:1.04; letter-spacing:-.01em; }
+h2{ font-weight:300; font-size:var(--t-h1);      line-height:1.10; letter-spacing:-.01em; }
+h3{ font-weight:400; font-size:var(--t-h3);      line-height:1.25; }
+h4{ font-weight:400; font-size:var(--t-h3);      line-height:1.25; }
+p{ margin:0 0 1.15em; } p:last-child{ margin-bottom:0; }
+/* Jost and Karla ship upright only, and a browser-slanted oblique is not a
+   typeface. Emphasis is therefore a change of weight in the same family,
+   never a change of face. */
+em{ font-style:normal; font-weight:400; }
+.lead{ font-size:clamp(16px,1.4vw,19px); line-height:1.62; color:var(--ink-2); font-weight:400; }
+.shell{ width:var(--shell); margin-inline:auto; }
+.pad{ padding-block:clamp(100px,13vw,190px); }
+.center{ text-align:center; }
+
+/* ---- THE LABEL, sheet 10 ----
+   Karla 700, 11.5 px, 0.20em, upper case. Every label on the site is the
+   same object, so it is set once here instead of eighteen times below, and
+   nothing downstream is allowed to re-track it. */
+.kicker, .btn, .nav-links a, .light, .row .n, .row .go, .plate .p-n,
+.plate .give, .pending, .pull cite, .ledger .k, .statement cite, .pbody .ctag,
+.portrait .ph, .portrait figcaption span, .facts .k, .field label, .reach dt,
+footer h4, .skip{
+  font-family:var(--body); font-weight:700; font-size:var(--t-label);
+  line-height:1.4; letter-spacing:.20em; text-transform:uppercase;
+}
+
+/* the eyebrow, with a hairline that draws itself in. There are three on the
+   page and there is no fourth: a label above every section is a rhythm, and
+   the same rhythm eight times is wallpaper. */
+.kicker{ color:var(--accent); margin:0 0 28px; display:flex; align-items:center; gap:16px; }
+.kicker::after{ content:''; height:1px; flex:1; max-width:88px; background:var(--hair);
+  transform:scaleX(0); transform-origin:left; transition:transform 1.1s var(--ease) .15s; }
+.-in .kicker::after, .kicker.-in::after{ transform:scaleX(1); }
+.center .kicker{ justify-content:center; }
+
+/* scroll reveal: everything arrives, nothing pops. Scoped to html.js so the
+   page still reads in full if the script never runs. */
+html.js .rise{ opacity:0; transform:translateY(18px); }
+html.js .rise.-in{ opacity:1; transform:none; transition:opacity .9s var(--ease), transform 1s var(--ease); }
+html.js .rise.-d1.-in{ transition-delay:.08s } html.js .rise.-d2.-in{ transition-delay:.16s }
+html.js .rise.-d3.-in{ transition-delay:.24s } html.js .rise.-d4.-in{ transition-delay:.32s }
+
+/* film grain, so photographic surfaces read as printed rather than soft */
+.grain::before{ content:''; position:absolute; inset:0; pointer-events:none; z-index:2; opacity:.32;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  background-size:160px 160px; }
+
+/* ---------- buttons ---------- */
+/* ---------- buttons ----------
+   One radius across the whole site: 2 px, everywhere, on every rectangle.
+   The only round things on the page are the sun in the light switch and the
+   charity crests, and both of those are drawings rather than controls. */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:12px; cursor:pointer;
+  text-decoration:none;
+  padding:15px 28px; min-height:44px; border:1px solid transparent; border-radius:2px;
+  transition:transform var(--tap) var(--ease), background var(--tap) var(--ease), color var(--tap) var(--ease),
+             border-color var(--tap) var(--ease), box-shadow .4s var(--ease); }
+.btn:active{ transform:translateY(0) scale(.985); }
+.btn-give{ color:var(--btn-ink); background:var(--ink); }
+.btn-give:hover{ transform:translateY(-2px); background:var(--accent); box-shadow:var(--shadow); }
+.btn-quiet{ color:var(--c-daybreak); border-color:rgba(244,237,225,.5); background:rgba(46,58,52,.28);
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+.btn-quiet:hover{ background:rgba(46,58,52,.44); border-color:var(--c-daybreak); transform:translateY(-2px); }
+.btn-ink{ color:var(--ink); border-color:var(--hair); }
+.btn-ink:hover{ border-color:var(--ink); transform:translateY(-2px); }
+.btn .arw{ transition:transform var(--tap) var(--ease); }
+.btn:hover .arw{ transform:translateX(4px); }
+/* THE call to action. First Light is spent here and nowhere else on the
+   page, which is what sheet 09 means by "one call to action". Still Ground
+   on First Light measures 5.42:1. */
+.btn-first{ color:var(--c-ground); background:var(--c-first); }
+.btn-first:hover{ background:var(--c-daybreak); transform:translateY(-2px); box-shadow:var(--shadow); }
+
+/* ============================================================
+   NAVIGATION - reversed over the photograph, then ink on paper
+   once the page scrolls up. The light switch lives here.
+============================================================ */
+.nav{ position:fixed; inset:0 0 auto; z-index:var(--z-nav); padding:24px var(--gutter);
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+  border-bottom:1px solid transparent; color:var(--nav-ink); background:var(--nav-hero-bg);
+  transition:border-color .6s var(--ease), padding .6s var(--ease); }
+.nav.-stuck{ background:var(--nav-bg); backdrop-filter:blur(16px) saturate(130%); -webkit-backdrop-filter:blur(16px) saturate(130%);
+  border-bottom-color:var(--nav-line); padding-block:14px; color:var(--ink); }
+.nav-progress{ position:absolute; left:0; bottom:-1px; height:1px; width:100%; transform:scaleX(var(--p,0));
+  transform-origin:left; background:var(--accent); opacity:0; transition:opacity .4s var(--ease); }
+
+/* ------------------------------------------------------------
+   THE LOGOTYPE, sheets 06 and 07
+
+   Two states, and the page uses both. The open logotype is drawn
+   at 220 px wide and above; below that the opening falls under a
+   pixel and a half, closes up and reads as a printing fault, so
+   the closed master takes over down to its own floor of 120 px.
+   Both are supplied artwork. Neither is recreated by recolouring
+   the other, and neither is ever re-tracked.
+
+   Clear space is one capital A on every side, which is 0.883 of
+   the cap height, which on this artwork is 9.07% of the rendered
+   width. It is set as a margin so it scales with the mark.
+
+   No shadow, no glow, no outline: sheet 14. Over the photograph
+   the mark is Daybreak and the scrim carries it, exactly as the
+   photography sheet says.
+------------------------------------------------------------ */
+.brand{ display:block; flex:none; line-height:0; --logo-w:236px;
+  margin-right:calc(var(--logo-w) * .0907); }
+.brand svg{ width:var(--logo-w); height:auto; --logo-ink:var(--nav-ink);
+  transition:width .6s var(--ease); }
+.nav.-stuck .brand{ --logo-w:224px; }
+.nav.-stuck .brand svg{ --logo-ink:var(--ink); }
+.lg-closed{ display:none; }
+.nav-links{ display:flex; align-items:center; gap:clamp(16px,2.4vw,36px); list-style:none; margin:0; padding:0; }
+.nav-links a{ text-decoration:none; color:currentColor; opacity:.86; white-space:nowrap;
+  padding:6px 0; position:relative;
+  transition:opacity .3s var(--ease); }
+/* the shadow is a legibility aid for reversed type on a photograph, so it
+   belongs to the dusk bar only; in day the type sits on its own ground */
+[data-theme="dusk"] .nav:not(.-stuck) .nav-links a{ text-shadow:0 1px 12px rgba(46,58,52,.45); }
+/* the current-section underline is an indicator, not decoration, so it takes
+   currentColor: paper-white over the photograph, ink once the nav is stuck */
+.nav-links a::after{ content:''; position:absolute; left:0; right:100%; bottom:0; height:2px; background:currentColor;
+  transition:right .34s var(--ease); }
+.nav-links a:hover{ opacity:1; }
+.nav-links a:hover::after, .nav-links a[aria-current="true"]::after{ right:0; }
+.nav-right{ display:flex; align-items:center; gap:14px; flex:none; }
+.nav .btn-give{ padding:12px 22px; color:currentColor; background:transparent; border-color:var(--nav-edge); }
+.nav .btn-give:hover{ background:var(--accent-soft); border-color:currentColor; transform:none; box-shadow:none; }
+.nav.-stuck .btn-give{ color:var(--btn-ink); background:var(--ink); border-color:transparent; }
+.nav.-stuck .btn-give:hover{ background:var(--accent); }
+.nav-toggle{ display:none; }
+
+/* the light switch: a small sun that slides from day to dusk */
+.light{ display:inline-flex; align-items:center; gap:10px; cursor:pointer; background:none; border:0; padding:0;
+  color:currentColor; }
+/* ------------------------------------------------------------
+   THE SWITCH
+
+   The same marsh, held in a capsule the width of a thumb: a sky, a
+   waterline, reeds standing in it, and the sun crossing on the arc
+   the hero shader draws. Going right it drops toward the horizon,
+   swells and turns amber the way a real one does, the sky follows
+   it down through the sunset, stars come up on the side it has
+   left, and the day's one cloud drifts off.
+
+   One length drives the whole scene, so it scales from a single
+   value the way the type does. The reeds are held clear of the
+   corner radius, or the pill slices them into stray arcs.
+------------------------------------------------------------ */
+.light-track{
+  --sky:34px;
+  font-size:var(--sky);
+  position:relative; flex:none;
+  width:2.3em; height:1em; border-radius:.5em; overflow:hidden;
+  background:linear-gradient(180deg,#6B8494 0%,#8FA292 34%,#C8C2B4 58%,#F4EDE1 74%);
+  box-shadow:inset 0 .05em .09em rgba(46,58,52,.3), inset 0 -.035em .05em rgba(244,237,225,.45),
+             0 0 0 1px var(--nav-edge);
+  transition:background .9s var(--ease), box-shadow .6s var(--ease), transform var(--tap) var(--ease); }
+.nav.-stuck .light-track{ box-shadow:inset 0 .05em .09em rgba(46,58,52,.3), inset 0 -.035em .05em rgba(244,237,225,.45),
+             0 0 0 1px var(--nav-line); }
+[data-theme="dusk"] .light-track{
+  background:linear-gradient(180deg,#1B1130 0%,#35203F 18%,#6E3038 38%,#A8462C 54%,#D9772F 66%,#F2A75C 74%); }
+
+/* the water takes the bottom quarter and repeats whatever sky is above it */
+.sky-water{ position:absolute; z-index:1; left:0; right:0; bottom:0; height:26%;
+  background:linear-gradient(180deg, rgba(143,162,146,.92), rgba(74,97,85,.96));
+  transition:background .9s var(--ease); }
+[data-theme="dusk"] .sky-water{ background:linear-gradient(180deg, rgba(216,122,58,.8), rgba(26,17,29,.96)); }
+
+/* the reeds stand on the waterline, in the same hand as the rule on The Way */
+.sky-reeds{ position:absolute; z-index:2; left:11%; width:78%; bottom:19%; height:auto; display:block;
+  fill:none; stroke:#2E3A34; stroke-width:.75; stroke-linecap:round;
+  transition:stroke .9s var(--ease); }
+[data-theme="dusk"] .sky-reeds{ stroke:#150E1B; }
+
+/* the sun, on the shader's own arc: right, down, larger and amber by the
+   time it gets there */
+.light-knob{ position:absolute; z-index:3; top:.12em; left:.175em; width:.62em; height:.62em; border-radius:50%;
+  background:radial-gradient(circle at 38% 34%, #FFFDF4 0%, #FFEDBC 38%, #F7CC72 72%, #E2A845 100%);
+  box-shadow:0 0 .22em rgba(255,232,168,.7), inset 0 -.03em .04em rgba(150,110,40,.45);
+  transition:transform 1.1s cubic-bezier(.6,.05,.25,1), background 1.1s var(--ease), box-shadow 1.1s var(--ease); }
+[data-theme="dusk"] .light-knob{ transform:translate(1.33em,.1em) scale(1.06);
+  background:radial-gradient(circle at 40% 36%, #FFE2B0 0%, #F7A85C 30%, #D9662A 66%, #A8431A 100%);
+  box-shadow:0 0 .28em rgba(236,132,58,.8), inset 0 -.03em .04em rgba(120,50,20,.45); }
+
+/* the stars come up behind it, scattered on the side it has left */
+.sky-stars{ position:absolute; z-index:2; top:.15em; left:.2em; width:.05em; height:.05em; border-radius:50%;
+  background:#F4EDE1; opacity:0;
+  box-shadow:.34em .12em 0 -.008em #F4EDE1, .14em .33em 0 -.016em #F4EDE1, .62em -.02em 0 -.011em #F4EDE1,
+             .48em .36em 0 -.018em #F4EDE1, .86em .2em 0 -.007em #F4EDE1, 1.06em .02em 0 -.016em #F4EDE1,
+             .78em .42em 0 -.019em #F4EDE1, 1.18em .3em 0 -.013em #F4EDE1;
+  transition:opacity .9s var(--ease) .15s; }
+[data-theme="dusk"] .sky-stars{ opacity:.92; }
+
+/* and the day's one cloud, which leaves when the light does */
+.sky-cloud{ position:absolute; z-index:2; right:.3em; top:.2em; width:.16em; height:.16em; border-radius:50%;
+  background:rgba(244,237,225,.96);
+  box-shadow:-.09em .035em 0 -.022em rgba(244,237,225,.96), .085em .045em 0 -.034em rgba(244,237,225,.92),
+             -.005em .07em 0 -.004em rgba(244,237,225,.96), .05em -.018em 0 -.05em rgba(244,237,225,.88);
+  transition:transform .9s var(--ease), opacity .55s var(--ease); }
+[data-theme="dusk"] .sky-cloud{ transform:translate(-.55em,.5em); opacity:0; }
+
+.light:hover .light-knob{ box-shadow:0 0 .34em rgba(255,232,168,.95), inset 0 -.03em .04em rgba(150,110,40,.45); }
+[data-theme="dusk"] .light:hover .light-knob{ box-shadow:0 0 .42em rgba(236,132,58,1), inset 0 -.03em .04em rgba(120,50,20,.45); }
+.light:active .light-track{ transform:scale(.97); }
+
+.light-label{ min-width:3.2em; text-align:left; opacity:.85; }
+.light:hover .light-label{ opacity:1; }
+
+/* ============================================================
+   HERO - the photograph is the whole point. One Florida wetland,
+   a boardwalk out to a viewing platform, shot twice from the same
+   spot, once in daylight and once at sunset, drawn through a
+   shader that moves between them: the sun climbs out of the top
+   of the frame for day and sinks behind the far treeline for
+   dusk, the open pools mirror it, and only the water moves under
+   the pointer. At either end the untouched photo.
+
+   The crop is anchored on the centre, and the shader reads the
+   same anchor, so a phone keeps the boardwalk and the point on
+   the treeline where the sun goes down.
+============================================================ */
+.hero{ position:relative; height:100svh; min-height:600px; overflow:hidden; background:var(--hero-fallback); }
+.hero canvas{ position:absolute; inset:0; width:100%; height:100%; touch-action:pan-y; opacity:0; transition:opacity .8s ease; }
+.hero canvas.-on{ opacity:1; }
+.hero-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 50%; }
+.hero-img.-day{ opacity:0; transition:opacity var(--slow) var(--ease); }
+[data-theme="day"] .hero-img.-day{ opacity:1; }
+/* Two layers, not one. The top scrim is always there because the navigation
+   sits on the photograph from the first frame. The wash under the copy is
+   only there to carry the copy, so it waits and arrives with it: the visitor
+   lands on the photograph with nothing on it at all. */
+.hero-scrim{ position:absolute; inset:0; pointer-events:none; z-index:var(--z-scrim); background:var(--scrim-top); }
+.hero-scrim::after{ content:''; position:absolute; inset:0;
+  background:var(--scrim-copy), var(--scrim-bot); }
+
+/* The hero holds three things: the headline, one sentence, and the two ways
+   forward. It used to carry the slogan as a label above the headline, and the
+   slogan has moved to the top of The Way. The reason is measured rather than
+   editorial: a label is 11.5 px by the type sheet, small text needs 4.5:1,
+   and on a phone the frame crops to its brightest column with the label
+   sitting high in it. Nothing short of a wash heavy enough to flatten the
+   photograph got that line to 4.5, and the photograph is worth more than the
+   position of one line. On paper at the top of The Way it reads at 10:1.
+
+   The light switch lives in the navigation, which is on screen the whole way
+   down the page, so it is not repeated here. Neither is a scroll cue: the
+   visitor is looking at the top of a page and already knows. */
+.hero-say{ position:absolute; z-index:var(--z-hero-copy); left:var(--gutter); right:var(--gutter);
+  bottom:clamp(56px,9vh,104px); }
+/* ------------------------------------------------------------
+   THE HERO WAITS
+
+   On arrival there is the photograph and nothing else. The words
+   come in on the visitor's first scroll, which is the first thing
+   they do that says they are reading rather than looking.
+
+   All of it is scoped to html.js, so with no JavaScript the copy
+   is simply there. Reduced motion gets it immediately and without
+   the travel, and a keyboard visitor gets it the moment focus
+   enters the hero, because type at zero opacity is still in the
+   tab order and nobody should tab into something invisible.
+------------------------------------------------------------ */
+.hero-copy{ max-width:min(720px, 100%); }
+html.js .hero-copy > *{ opacity:0; transform:translateY(22px); }
+html.js .hero.-said .hero-copy > *{ opacity:1; transform:none;
+  transition:opacity .95s var(--ease), transform 1.1s var(--ease); }
+html.js .hero.-said .hero-sub{ transition-delay:.12s }
+html.js .hero.-said .hero-cta{ transition-delay:.22s }
+html.js .hero-scrim::after{ opacity:0; transition:opacity 1.25s var(--ease); }
+html.js .hero.-said .hero-scrim::after{ opacity:1; }
+@media (prefers-reduced-motion:reduce){
+  html.js .hero-copy > *{ opacity:1; transform:none; }
+  html.js .hero-scrim::after{ opacity:1; }
+}
+.hero-line{ color:var(--c-daybreak); margin:0; max-width:18ch;
+  text-shadow:0 2px 30px rgba(46,58,52,.5), 0 1px 2px rgba(46,58,52,.35); }
+/* Jost has no italic, so the emphasis is the Book weight against the Light */
+.hero-line em{ font-weight:400; }
+.hero-sub{ margin:22px 0 0; max-width:42ch; font-size:var(--t-body); line-height:1.55;
+  color:rgba(244,237,225,.88); text-shadow:0 1px 12px rgba(46,58,52,.5); }
+.hero-cta{ margin-top:32px; display:flex; flex-wrap:wrap; gap:12px; max-width:none; }
+
+/* ============================================================
+   THE PAGES BREATHE
+
+   Below the photograph the site used to be paper and nothing else.
+   This is not a background image and not a drawing of a leaf: it is
+   marsh material carried on the air, silhouettes drawn once into
+   offscreen canvases at three blur radii and then only moved, so
+   the depth of field is real optical blur rather than a soft edge
+   faked in the paint. Focus sits at the middle distance; the near
+   ones bloom out of it and the far ones dissolve, the way they do
+   in the photograph at the top of the page.
+
+   It is tinted a shade off the paper rather than coloured, so the
+   page reads as pressed rather than decorated, and it is masked
+   away from the middle where the reading happens.
+
+   Scroll carries the layers at different rates. The pointer stirs
+   what it passes and the air settles again behind it, which is the
+   same gesture as the ripples on the water above.
+============================================================ */
+#nature{ position:fixed; inset:0; width:100%; height:100%; z-index:var(--z-nature);
+  pointer-events:none; opacity:0; transition:opacity .9s var(--ease);
+  /* the quiet zone is tied to the reading column itself, not to a percentage
+     of the window: at 1280 the shell leaves only 40px of gutter, so a
+     percentage mask put its full strength straight over the text */
+  /* a mask reads alpha only, so the colour in these stops is arbitrary. It is
+     written as Still Ground anyway, because nothing in this file should read
+     as pure black to the next person who greps it. */
+  --mask:linear-gradient(90deg,
+    #2E3A34 0,
+    #2E3A34 calc(50% - var(--shell) / 2 - 30px),
+    rgba(46,58,52,.3) calc(50% - var(--shell) / 2 + 80px),
+    rgba(46,58,52,.3) calc(50% + var(--shell) / 2 - 80px),
+    #2E3A34 calc(50% + var(--shell) / 2 + 30px),
+    #2E3A34 100%);
+  -webkit-mask-image:var(--mask); mask-image:var(--mask); }
+#nature.-on{ opacity:1; }
+/* the reading column and the three photographic walls stay above it */
+.shell{ position:relative; z-index:var(--z-content); }
+.hero, .statement, .cta{ z-index:var(--z-content); }
+
+/* ---------- reading sections ---------- */
+section{ position:relative; }
+.on-paper{ background:var(--paper); }
+.on-paper-2{ background:var(--paper-2); }
+
+/* --- THE WAY --- */
+.idea .shell{ max-width:820px; position:relative; z-index:2; }
+.idea{ position:relative; }
+.idea .verse{ font-family:var(--display); font-weight:300; font-size:var(--t-h1); line-height:1.1;
+  color:var(--ink); margin:0 0 40px; letter-spacing:-.01em; max-width:24ch; margin-inline:auto; }
+.idea .verse em{ font-weight:400; }
+.idea .lead{ max-width:60ch; margin-inline:auto; }
+.idea .name-note{ margin-top:44px; padding-top:30px; border-top:1px solid var(--hair);
+  font-size:var(--t-small); line-height:1.55; color:var(--ink-2); max-width:56ch; margin-inline:auto; }
+
+/* ---- THE SEAL, sheet 13 ----
+   The lotus is in the brand and not in the logo. It appears once on this
+   page, large and at eight per cent, on the section that explains why it is
+   here at all. It is nowhere near the logotype's clear space, and it is
+   never the favicon. */
+.seal-watermark{ position:absolute; z-index:0; left:50%; top:50%; translate:-50% -50%;
+  width:min(560px, 74vw); height:auto; opacity:.08; pointer-events:none;
+  --logo-ink:var(--ink); }
+
+/* ============================================================
+   CHARITIES - the seven causes as an index. A list on one side
+   in the manner of a table of contents; on the other, a plate
+   that shows the chosen cause and the partners standing behind
+   it. Nothing spins. The visitor reads, chooses, gives.
+============================================================ */
+.causes{ background:var(--paper); }
+.causes-head{ max-width:760px; }
+.causes-head .lead{ margin-top:24px; max-width:56ch; }
+.index{ display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:clamp(40px,6vw,96px); margin-top:clamp(48px,6vw,84px); align-items:start; }
+.index-list{ list-style:none; margin:0; padding:0; border-top:1px solid var(--hair); }
+.index-list li{ border-bottom:1px solid var(--hair); }
+.row{ width:100%; display:grid; grid-template-columns:52px 1fr auto; align-items:baseline; gap:18px; text-align:left;
+  cursor:pointer; background:none; border:0; padding:22px 0 22px 2px; color:var(--ink); position:relative;
+  transition:padding .5s var(--ease); }
+.row .n{ color:var(--ink-2); font-variant-numeric:tabular-nums; transition:color .4s var(--ease); }
+.row .name{ font-family:var(--display); font-weight:300; font-size:var(--t-h1); line-height:1.1;
+  letter-spacing:-.01em; transition:transform .28s var(--ease); display:inline-block; }
+.row .go{ color:var(--accent); opacity:0;
+  transform:translateX(-6px); transition:opacity var(--tap) var(--ease), transform .24s var(--ease); white-space:nowrap; }
+.row::before{ content:''; position:absolute; left:0; bottom:-1px; height:1px; width:0; background:var(--accent); transition:width .5s var(--ease); }
+.row:hover .name, .row[aria-pressed="true"] .name{ transform:translateX(8px); }
+.row:hover .go, .row[aria-pressed="true"] .go{ opacity:1; transform:none; }
+.row[aria-pressed="true"] .n{ color:var(--accent); }
+.row[aria-pressed="true"]::before{ width:100%; }
+.row:hover::before{ width:100%; }
+
+.plate{ position:sticky; top:104px; background:var(--plate); padding:clamp(30px,3.6vw,48px); min-height:560px; overflow:hidden;
+  border:1px solid var(--edge); border-radius:2px; }
+.plate::after{ content:''; position:absolute; inset:auto -40px -60px auto; width:260px; height:260px; border-radius:50%;
+  background:radial-gradient(circle, var(--c-first) 0%, transparent 62%); opacity:.18; pointer-events:none; filter:blur(14px); }
+[data-theme="day"] .plate::after{ opacity:.1; }
+[data-theme="dusk"] .plate::after{ opacity:.4; }
+/* The icon used to be pinned to the top right corner, which meant any cause
+   with a long name, or a long line under it, ran its own copy underneath the
+   drawing. It sits in the flow now, in its own grid column, so the text
+   cannot reach it however long the string gets. */
+.plate .phead{ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:clamp(18px,2.4vw,32px); align-items:start; }
+.plate .glyph{ width:clamp(52px,5.6vw,76px); height:auto; margin-top:2px;
+  fill:none; stroke:var(--accent); stroke-width:.85; stroke-linecap:round; stroke-linejoin:round; opacity:.5; }
+.plate .p-n{ color:var(--accent); }
+.plate h3{ font-weight:300; font-size:var(--t-h2); margin-top:16px; letter-spacing:-.01em; }
+.plate .why{ font-size:var(--t-body); line-height:1.6; color:var(--ink-2); margin:22px 0 0; max-width:40ch; }
+.plate .entries{ list-style:none; margin:34px 0 0; padding:0; border-top:1px solid var(--hair); }
+.plate .entries li{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px; align-items:start; padding:15px 0; border-bottom:1px solid var(--hair); }
+.plate .crest{ width:40px; height:40px; display:grid; place-items:center; border-radius:50%; border:1px solid var(--edge);
+  font-family:var(--body); font-weight:700; font-size:var(--t-label); letter-spacing:.06em; text-indent:.06em;
+  color:var(--ink-2); background:var(--frost); }
+.plate .entry{ min-width:0; }
+.plate .cname{ font-family:var(--display); font-weight:400; font-size:var(--t-h3); color:var(--ink);
+  line-height:1.25; text-decoration:none; border-bottom:1px solid transparent; transition:border-color var(--tap) var(--ease), color var(--tap) var(--ease); }
+.plate .cname:hover{ border-bottom-color:var(--accent); }
+/* the mark follows the last word rather than the edge of the column, so a
+   name that wraps does not leave its arrow stranded */
+.ext{ display:inline-block; width:10px; height:10px; margin-left:7px; vertical-align:baseline;
+  fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
+  opacity:.45; transition:opacity var(--tap) var(--ease), transform var(--tap) var(--ease); }
+.cname:hover .ext{ opacity:1; transform:translate(1px,-1px); }
+.entries-empty{ margin-top:34px; padding-top:26px; border-top:1px solid var(--hair); }
+.entries-empty p{ font-size:var(--t-small); line-height:1.55; color:var(--ink-2); margin:0 0 .8em; max-width:40ch; }
+.entries-empty strong{ font-family:var(--display); font-weight:400; font-size:var(--t-h3); color:var(--ink); }
+.entries-empty .pending{ margin-top:6px; }
+.plate .cdesc{ display:block; font-size:var(--t-small); color:var(--ink-2); margin-top:5px; line-height:1.55; }
+.plate .pending{ margin:0; }
+.plate .give{ margin-top:26px; display:inline-flex; align-items:center; gap:10px;
+  color:var(--ink); text-decoration:none; border-bottom:1px solid var(--accent); padding:13px 0 12px;
+  transition:gap .22s var(--ease); }
+.plate .give:hover{ gap:16px; }
+.plate .give:active{ transform:scale(.99); }
+.plate-in{ animation:plateIn .6s var(--ease) both; }
+@keyframes plateIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+.pending{ display:inline-block; color:var(--ink-2); border:1px dashed var(--edge);
+  padding:6px 10px; border-radius:2px; white-space:nowrap; }
+.index-note{ margin-top:28px; font-size:var(--t-small); line-height:1.55; color:var(--ink-2); max-width:60ch; }
+
+/* ---------- DUE DILIGENCE ---------- */
+.trust{ background:var(--paper-2); }
+.trust-grid{ display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(40px,7vw,110px); align-items:start; }
+.trust-intro{ position:sticky; top:110px; }
+/* One of the two places on this site where EB Garamond appears: someone is
+   being quoted. Sheet 10 puts the quote at 22 px italic, and that is what
+   this is. */
+.pull{ font-family:var(--quote); font-style:italic; font-weight:400; font-size:var(--t-quote); line-height:1.45;
+  color:var(--ink); border-left:1px solid var(--hair); padding-left:26px; margin:38px 0 0; max-width:34ch; }
+.pull cite{ display:block; margin-top:20px; font-style:normal; color:var(--ink-2); }
+.steps{ list-style:none; margin:0; padding:0; counter-reset:s; border-top:1px solid var(--hair); }
+.steps li{ counter-increment:s; display:grid; grid-template-columns:72px 1fr; gap:22px; padding:34px 0; border-bottom:1px solid var(--hair); }
+.steps li::before{ content:counter(s,decimal-leading-zero); font-family:var(--display); font-weight:300;
+  font-size:var(--t-h1); line-height:1; color:var(--accent);
+  font-variant-numeric:tabular-nums; letter-spacing:-.01em; }
+.steps h3{ margin-bottom:10px; }
+.steps p{ font-size:var(--t-body); line-height:1.65; color:var(--ink-2); margin:0; max-width:52ch; }
+
+/* ---------- WHERE THE MONEY GOES ----------
+   Every guide to charity websites names the same two failures: no impact
+   figures and no visible finances. This foundation has not made a grant
+   yet, so inventing either would be the worse sin. What it can publish now
+   is the commitment and the date it becomes checkable, which is what this
+   ledger does. Three columns of fact, no card around them. */
+.ledger{ margin-top:clamp(48px,6vw,80px); padding-top:clamp(30px,4vw,44px); border-top:1px solid var(--hair); }
+.ledger h3{ font-weight:300; font-size:var(--t-h2); max-width:20ch; }
+.ledger-note{ margin:14px 0 0; font-size:var(--t-body); line-height:1.65; color:var(--ink-2); max-width:58ch; }
+.ledger-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(20px,3vw,44px); margin-top:clamp(30px,4vw,44px); }
+.ledger-grid > div{ border-top:1px solid var(--hair); padding-top:20px; }
+.ledger .fig{ display:block; font-family:var(--display); font-weight:300; font-size:var(--t-h1); line-height:1;
+  letter-spacing:-.01em; color:var(--accent); }
+.ledger .k{ display:block; margin-top:14px; color:var(--ink-2); }
+.ledger .v{ display:block; margin-top:10px; font-size:var(--t-small); line-height:1.55; color:var(--ink-2); }
+.ledger .v .pending{ margin-top:10px; }
+@media (max-width:860px){ .ledger-grid{ grid-template-columns:1fr; gap:0; } .ledger-grid > div{ padding-block:22px; } }
+
+/* ---------- STATEMENT - the quote, given a wall of its own ---------- */
+.statement{ position:relative; overflow:hidden; min-height:clamp(560px,74vh,780px); display:grid; place-items:center; background:var(--c-ground); }
+/* Framed on the horizon and not scaled up. It used to sit at 12% with a 1.04
+   enlargement on top, which pushed the sky out of shot and left a close crop
+   of reeds nobody had chosen. The wall turns with the light like the rest of
+   the page. */
+.statement img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 44%; }
+.statement img.-day{ opacity:0; transition:opacity var(--slow) var(--ease); }
+[data-theme="day"] .statement img.-day{ opacity:1; }
+.statement::after{ content:''; position:absolute; inset:0; background:linear-gradient(to bottom, var(--st-0), var(--st-1) 45%, var(--st-2)); }
+.statement .shell{ position:relative; z-index:3; max-width:980px; text-align:center; padding-block:clamp(80px,10vw,130px); }
+/* The second and last EB Garamond on the page. A full-bleed wall is not the
+   document column sheet 10 measures, so the quote is set here at display
+   scale rather than at 22 px; the face, the weight and the italic are the
+   sheet's. */
+.statement blockquote{ margin:0; font-family:var(--quote); font-style:italic; font-weight:400;
+  color:var(--c-daybreak); font-size:var(--t-quote-wall); line-height:1.24; letter-spacing:-.01em;
+  text-shadow:0 2px 30px rgba(46,58,52,.5); }
+.statement cite{ display:block; margin-top:clamp(28px,4vh,44px); font-style:normal; color:rgba(244,237,225,.78); }
+
+/* ============================================================
+   FEATURED PARTNERS
+
+   These used to be three drawn plates with a glyph inside each,
+   which is a picture of a photograph rather than a photograph.
+   There is no honest image of another organisation's work to put
+   here, so there is no frame: three columns hung at three heights,
+   each under its own hairline, and the charity's name is the
+   thing that carries the entry. Three equal cards side by side is
+   still the one arrangement this page will not use.
+============================================================ */
+.partners-head{ max-width:60ch; }
+.partners-note{ margin:20px 0 0; font-size:var(--t-body); line-height:1.62; color:var(--ink-2); max-width:52ch; }
+.hang{ display:grid; grid-template-columns:1.14fr .82fr 1.04fr; gap:clamp(26px,4.2vw,64px);
+  margin-top:clamp(52px,7vw,88px); align-items:start; }
+.pentry{ margin-top:var(--lift,0px); border-top:1px solid var(--hair); padding-top:24px; }
+.pmark{ width:28px; height:28px; fill:none; stroke:var(--accent); stroke-width:.9; stroke-linecap:round;
+  stroke-linejoin:round; opacity:.65; margin-bottom:20px;
+  transition:transform .45s var(--ease), opacity var(--tap) var(--ease); }
+.pentry:hover .pmark{ transform:translateY(-3px); opacity:1; }
+.pbody .ctag{ display:block; color:var(--accent); }
+.pbody h3{ margin-top:12px; font-weight:300; font-size:var(--t-h2); letter-spacing:-.01em; }
+.pbody .cname{ color:var(--ink); text-decoration:none;
+  border-bottom:1px solid transparent; transition:border-color var(--tap) var(--ease); }
+.pbody .cname:hover{ border-bottom-color:var(--accent); }
+.pbody p{ margin:14px 0 0; font-size:var(--t-small); line-height:1.55; color:var(--ink-2); max-width:36ch; }
+.pbody .pending{ margin-top:17px; }
+
+/* ---------- ABOUT ---------- */
+.about-grid{ display:grid; grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr); gap:clamp(40px,7vw,100px); align-items:start; }
+.portrait{ aspect-ratio:4/5; position:relative; overflow:hidden; margin:0; background:var(--plate);
+  border:1px solid var(--edge); border-radius:2px; display:grid; place-items:center; text-align:center; }
+.portrait .ph{ color:var(--ink-2); line-height:2.2; }
+.portrait figcaption{ position:absolute; inset:auto 0 0; padding:22px 24px; text-align:left; border-top:1px solid var(--edge); background:var(--frost); backdrop-filter:blur(6px); }
+.portrait figcaption b{ display:block; font-family:var(--display); font-weight:400; font-size:var(--t-h3); color:var(--ink); }
+.portrait figcaption span{ display:block; margin-top:8px; color:var(--ink-2); }
+/* With the photograph in, the caption sits on her lap and the suit is dark,
+   so the frost alone cannot carry the name. It takes the navigation's ground,
+   the page's own paper at .88, which reads the same in either light. */
+.portrait-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 20%; }
+.portrait.-photo figcaption{ background:var(--nav-bg); }
+.facts{ list-style:none; margin:26px 0 0; padding:0; border-top:1px solid var(--hair); }
+.facts li{ padding:15px 0; display:flex; justify-content:space-between; gap:18px; align-items:baseline; border-bottom:1px solid var(--hair); }
+.facts .k{ color:var(--ink-2); }
+.facts .v{ font-family:var(--display); font-weight:400; font-size:17px; color:var(--ink); text-align:right; }
+.about h3{ margin-top:46px; }
+.about h3 + p{ margin-top:14px; color:var(--ink-2); max-width:58ch; }
+
+/* ---------- CONTACT ---------- */
+.contact{ background:var(--paper-2); }
+.form-grid{ display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:clamp(40px,7vw,100px); align-items:start; }
+.field{ margin-bottom:24px; }
+.field label{ display:block; color:var(--ink-2); margin-bottom:10px; }
+.field input,.field select,.field textarea{ width:100%; min-height:44px; font-family:var(--body); font-size:16px; font-weight:400; color:var(--ink);
+  background:transparent; border:0; border-bottom:1px solid var(--hair); border-radius:0; padding:12px 0; transition:border-color var(--tap) var(--ease); }
+.field select{ appearance:none; -webkit-appearance:none; background-image:linear-gradient(45deg, transparent 50%, var(--ink-2) 50%), linear-gradient(135deg, var(--ink-2) 50%, transparent 50%);
+  background-position:calc(100% - 14px) 50%, calc(100% - 9px) 50%; background-size:5px 5px; background-repeat:no-repeat; padding-right:30px; }
+.field select option{ background:var(--paper); color:var(--ink); }
+.field textarea{ min-height:140px; resize:vertical; line-height:1.6; }
+.field input:focus,.field select:focus,.field textarea:focus{ outline:none; border-bottom-color:var(--ink); }
+.field .hint{ margin-top:9px; font-size:var(--t-small); line-height:1.55; color:var(--ink-2); }
+.field .err{ margin:9px 0 0; font-size:var(--t-small); line-height:1.55; color:var(--warn); font-weight:700; }
+.field .err[hidden]{ display:none; }
+.field.-bad input, .field.-bad select, .field.-bad textarea{ border-bottom-color:var(--warn); }
+.form-note{ margin-top:18px; font-size:var(--t-small); line-height:1.55; color:var(--ink-2); }
+.form-status{ margin-top:18px; font-size:var(--t-body); color:var(--ink); min-height:1.5em; }
+.reach{ border-left:1px solid var(--hair); padding-left:clamp(24px,3vw,44px); }
+.reach dl{ margin:0; }
+.reach dt{ color:var(--ink-2); margin-top:28px; }
+.reach dt:first-child{ margin-top:0; }
+.reach dd{ margin:9px 0 0; font-size:var(--t-body); }
+.reach a{ color:var(--ink); text-decoration:none; border-bottom:1px solid var(--hair); padding-bottom:2px; transition:border-color .3s var(--ease); }
+.reach a:hover{ border-bottom-color:var(--accent); }
+
+/* ---------- DONATE ---------- */
+.cta{ position:relative; overflow:hidden; text-align:center; color:var(--c-daybreak); min-height:clamp(460px,58vh,640px); display:grid; place-items:center; background:var(--c-ground); }
+.cta-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 42%; transform:scale(1.04); }
+.cta-img.-day{ opacity:0; transition:opacity var(--slow) var(--ease); }
+[data-theme="day"] .cta-img.-day{ opacity:1; }
+.cta::after{ content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(to bottom, rgba(46,58,52,.62), rgba(46,58,52,.48) 46%, rgba(46,58,52,.78)); }
+.cta .shell{ position:relative; z-index:3; max-width:700px; padding-block:clamp(72px,9vw,110px); }
+.cta .kicker{ color:var(--c-daybreak); justify-content:center; }
+.cta .kicker::after{ background:rgba(244,237,225,.5); }
+.cta h2{ color:var(--c-daybreak); }
+.cta .lead{ color:rgba(244,237,225,.9); margin:22px auto 36px; max-width:46ch; }
+.cta .cta-note{ margin-top:28px; font-size:var(--t-small); line-height:1.55; color:rgba(244,237,225,.78); max-width:56ch; margin-inline:auto; }
+
+/* ---------- FOOTER ---------- */
+footer{ background:var(--paper-3); color:var(--ink-2); padding:clamp(60px,7vw,90px) 0 40px; font-size:var(--t-small); line-height:1.55; }
+.foot-grid{ display:grid; grid-template-columns:1.4fr repeat(3,minmax(0,1fr)); gap:clamp(26px,4vw,56px); }
+footer h4{ color:var(--accent); margin:0 0 18px; }
+footer ul{ list-style:none; margin:0; padding:0; display:grid; gap:11px; }
+footer a{ text-decoration:none; color:var(--ink-2); transition:color .3s var(--ease); }
+footer a:hover{ color:var(--ink); }
+/* the footer gets the open logotype: there is room here for the mark above
+   its 220 px minimum, so the opening stays open. Sheet 07. */
+.foot-brand{ display:block; line-height:0; --logo-w:224px; margin-bottom:calc(var(--logo-w) * .0907); }
+.foot-brand svg{ width:var(--logo-w); height:auto; --logo-ink:var(--ink); }
+.foot-blurb{ margin-top:8px; max-width:34ch; color:var(--ink-2); }
+.foot-base{ margin-top:clamp(44px,6vw,70px); padding-top:26px; border-top:1px solid var(--hair); display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; color:var(--ink-2); }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:1020px){
+  .index, .trust-grid, .about-grid, .form-grid{ grid-template-columns:1fr; }
+  .plate{ position:relative; top:auto; min-height:0; order:-1; }
+  .trust-intro{ position:static; }
+  .reach{ border-left:0; border-top:1px solid var(--hair); padding-left:0; padding-top:34px; }
+  .foot-grid{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width:1180px){
+  .light-label{ display:none; }
+  .nav-links{ gap:clamp(14px,1.8vw,26px); }
+  /* still above the 220 px floor, so the mark stays open */
+  .brand{ --logo-w:224px; }
+}
+/* ------------------------------------------------------------
+   Below this width the navigation cannot carry the logotype at
+   220 px, which is where the opening stops rendering cleanly. So
+   the mark closes: same letterforms, same spacing, same weight,
+   supplied artwork rather than a recolour. Sheets 06 and 07.
+------------------------------------------------------------ */
+@media (max-width:980px){
+  .nav{ padding:16px var(--gutter); }
+  .brand{ --logo-w:176px; }
+  .nav.-stuck .brand{ --logo-w:172px; }
+  .nav .lg-open{ display:none; }
+  .nav .lg-closed{ display:block; }
+  .nav-links{ position:fixed; inset:0 0 0 auto; width:min(320px,86vw); z-index:var(--z-panel); flex-direction:column; align-items:flex-start;
+    justify-content:center; gap:20px; padding:0 34px; background:var(--nav-bg); backdrop-filter:blur(18px) saturate(130%);
+    transform:translateX(100%); transition:transform .5s var(--ease); }
+  .nav-links a{ font-family:var(--body); font-weight:400; font-size:16px; letter-spacing:0;
+    text-transform:none; color:var(--ink); text-shadow:none; opacity:1; }
+  body.-menu .nav-links{ transform:none; }
+  .nav-toggle{ display:grid; place-items:center; width:44px; height:44px; z-index:calc(var(--z-panel) + 1); cursor:pointer; background:none;
+    border:1px solid var(--nav-edge); border-radius:2px; color:currentColor; }
+  .nav.-stuck .nav-toggle{ border-color:var(--edge); }
+  .nav-toggle span{ display:block; width:15px; height:1px; background:currentColor; position:relative; transition:.35s var(--ease); }
+  .nav-toggle span::before,.nav-toggle span::after{ content:''; position:absolute; left:0; width:15px; height:1px; background:currentColor; transition:.35s var(--ease); }
+  .nav-toggle span::before{ top:-5px; } .nav-toggle span::after{ top:5px; }
+  body.-menu .nav-toggle span{ background:transparent; }
+  body.-menu .nav-toggle span::before{ top:0; transform:rotate(45deg); }
+  body.-menu .nav-toggle span::after{ top:0; transform:rotate(-45deg); }
+}
+@media (max-width:900px){
+  .hang{ grid-template-columns:1fr; gap:clamp(34px,7vw,52px); }
+  .pentry{ margin-top:0; }
+}
+@media (max-width:760px){
+  /* Karla is never set below 14 px, sheet 10, and on a phone the reading
+     sizes come up rather than down. */
+  body{ font-size:16px; }
+  .hero-sub{ font-size:16px; }
+  .steps p, .about h3 + p, .ledger-note{ font-size:16px; }
+  .nav{ padding:14px var(--gutter); }
+  .nav .btn-give{ padding:10px 15px; }
+  .hero-say{ bottom:clamp(64px,10vh,96px); }
+  .hero-copy{ max-width:100%; }
+  .hero-line{ max-width:13ch; }
+  .hero-cta .btn{ padding:13px 18px; }
+  .row{ grid-template-columns:40px 1fr; }
+  .row .go{ display:none; }
+  .steps li{ grid-template-columns:1fr; gap:10px; }
+  .foot-grid{ grid-template-columns:1fr; }
+  .seal-watermark{ width:86vw; }
+}
+
+/* Measured at 390px: the bar carries the closed logotype, the light switch,
+   Donate and the menu button. Everything gives up a little room rather than
+   one control losing all of it, and the mark stays above its 120 px floor. */
+@media (max-width:620px){
+  .nav{ gap:8px; }
+  .nav-right{ gap:8px; }
+  .brand{ --logo-w:140px; }
+  .nav.-stuck .brand{ --logo-w:132px; }
+  .nav .btn-give{ padding:0 13px; }
+  .light-track{ --sky:28px; }
+}
+/* ------------------------------------------------------------
+   The small phone. The closed logotype has a floor of 120 px and
+   the mark is not taken below it, so at 360 the rest of the bar
+   gives up the room instead: the gutter, the gaps, the sun and
+   the padding on Donate. Measured intrinsic total at 360 is 345
+   inside 360, and 360 is the narrowest phone still in use.
+------------------------------------------------------------ */
+@media (max-width:430px){
+  .brand{ --logo-w:126px; }
+  .nav.-stuck .brand{ --logo-w:122px; }
+}
+@media (max-width:400px){
+  .nav{ padding-inline:16px; gap:6px; }
+  .nav-right{ gap:6px; }
+  .brand{ --logo-w:120px; }
+  .nav.-stuck .brand{ --logo-w:120px; }
+  .light-track{ --sky:26px; }
+  .nav .btn-give{ padding:0 9px; }
+  .nav-toggle{ width:40px; }
+}
+
+/* ============================================================
+   TOUCH
+   Measured at 390px, several controls came in under the 44px
+   floor: the light switch, the menu button, Donate, the give link
+   and every nav and footer link. The hit areas are opened up only
+   where the pointer is coarse, so the desktop typography keeps
+   its spacing.
+============================================================ */
+@media (pointer:coarse){
+  .nav-links a{ padding:12px 0; }
+  .light{ padding:9px 0; }
+  .nav .btn-give{ min-height:44px; }
+  .brand, .foot-brand{ padding-block:14px; }
+  footer ul{ gap:2px; }
+  footer ul a, footer ul .pending{ display:inline-block; padding-block:10px; }
+  .reach a{ display:inline-block; padding-block:9px; }
+  .plate .cname, .pbody .cname{ padding-block:9px; }
+  .plate .entries li{ padding-block:9px; }
+  .foot-base{ gap:20px; }
+}
+
+/* a landscape phone is 360 tall; the hero copy has to give way rather than
+   slide up underneath the navigation */
+@media (max-height:620px) and (min-width:620px){
+  .hero{ min-height:480px; }
+  .hero-line{ font-size:clamp(30px,4.2vw,46px); }
+  .hero-sub{ display:none; }
+  .hero-say{ bottom:clamp(40px,7vh,64px); }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ animation-duration:.001ms!important; animation-iteration-count:1!important; transition-duration:.001ms!important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="nature" aria-hidden="true"></canvas>
+
+<!-- ------------------------------------------------------------
+     THE MASTERS
+
+     Four symbols, lifted straight out of logo-masters/svg and the
+     seal folder without a node moved: the horizontal logotype open
+     and closed, the symbol, and the lotus seal. Nothing here is a
+     recolour of anything else, which is the rule on sheet 07. The
+     only edit is that the flat ink is read from --logo-ink so the
+     mark can travel from Daybreak on the photograph to Still
+     Ground on the paper without a second file.
+------------------------------------------------------------ -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs>
+    <symbol id="logo" viewBox="0 0 6812.7 1083.0"><g transform="translate(103.0 839.0) scale(1 -1)"><g transform="translate(0.0 0.0) scale(1.0000)" fill="var(--logo-ink)" stroke="var(--logo-ink)"><path d="M1623.3983154296875 350.0Q1623.3983154296875 355.6394348144531 1623.55224609375 361.20001220703125H1565.1373291015625Q1565.000244140625 355.6324768066406 1565.000244140625 350.0Q1565.000244140625 273.199951171875 1590.9002075195312 207.39996337890625Q1616.8001708984375 141.5999755859375 1663.8001098632812 93.29998779296875Q1710.800048828125 45.0 1774.3999633789062 17.9000244140625Q1837.9998779296875 -9.199951171875 1912.7998046875 -9.199951171875Q1988.19970703125 -9.199951171875 2051.4996337890625 17.9000244140625Q2114.799560546875 45.0 2161.7994384765625 93.29998779296875Q2208.79931640625 141.5999755859375 2234.6993408203125 207.39996337890625Q2260.599365234375 273.199951171875 2260.599365234375 350.0Q2260.599365234375 355.6275634765625 2260.462158203125 361.20001220703125H2202.04736328125Q2202.201171875 355.6438293457031 2202.201171875 350.0Q2202.201171875 262.5994873046875 2164.901123046875 193.99908447265625Q2127.60107421875 125.398681640625 2062.5006713867188 85.7984619140625Q1997.4002685546875 46.1982421875 1912.7998046875 46.1982421875Q1829.1993408203125 46.1982421875 1763.5989990234375 85.7984619140625Q1697.9986572265625 125.398681640625 1660.698486328125 193.99908447265625Q1623.3983154296875 262.5994873046875 1623.3983154296875 350.0ZM3525.48681640625 361.20001220703125H3468.522216796875L3315.000244140625 0.0H3376.79833984375L3473.35205078125 234.801513671875H3774.757568359375L3871.2001953125 0.0H3932.998291015625L3779.476318359375 361.20001220703125H3722.831787109375L3753.572021484375 286.7998046875H3494.84619140625L3525.48681640625 361.20001220703125ZM473.47625732421875 361.20001220703125H416.83172607421875L447.5718688964844 286.7998046875H188.8462371826172L219.48684692382812 361.20001220703125H162.5222930908203L9.000244140625 0.0H70.7982177734375L167.35195922851562 234.801513671875H468.7575378417969L565.2003173828125 0.0H626.998291015625L473.47625732421875 361.20001220703125ZM1012.9990234375 0.0Q1114.9990234375 0.0 1192.5989379882812 44.0Q1270.1988525390625 88.0 1313.5987548828125 166.5Q1356.9986572265625 245.0 1356.9986572265625 350.0Q1356.9986572265625 355.63897705078125 1356.87353515625 361.20001220703125H1301.4556884765625Q1301.6004638671875 355.64556884765625 1301.6004638671875 350.0Q1301.6004638671875 282.9996337890625 1281.2003784179688 228.59930419921875Q1260.80029296875 174.198974609375 1223.0001220703125 135.49871826171875Q1185.199951171875 96.7984619140625 1131.7996826171875 76.09832763671875Q1078.3994140625 55.398193359375 1012.9990234375 55.398193359375H878.3984375V361.20001220703125H823.000244140625V0.0ZM2197.677490234375 408.79998779296875H2256.626953125Q2250.4560546875 453.0517272949219 2234.69921875 492.9000244140625Q2208.79931640625 558.4000244140625 2161.7994384765625 606.7000122070312Q2114.799560546875 655.0 2051.4996337890625 682.0999755859375Q1988.19970703125 709.199951171875 1912.7998046875 709.199951171875Q1837.9998779296875 709.199951171875 1774.3999633789062 682.0999755859375Q1710.800048828125 655.0 1663.8001098632812 606.7000122070312Q1616.8001708984375 558.4000244140625 1590.900146484375 492.9000244140625Q1575.1436767578125 453.0523376464844 1568.9727783203125 408.79998779296875H1627.9219970703125Q1636.3880615234375 461.6209411621094 1660.698486328125 506.200927734375Q1697.9986572265625 574.601318359375 1763.5989990234375 614.2015380859375Q1829.1993408203125 653.8017578125 1912.7998046875 653.8017578125Q1997.4002685546875 653.8017578125 2062.5006713867188 614.2015380859375Q2127.60107421875 574.601318359375 2164.901123046875 506.200927734375Q2189.21142578125 461.6209716796875 2197.677490234375 408.79998779296875ZM823.000244140625 700.0V408.79998779296875H878.3984375V644.601806640625H1012.9990234375Q1078.3994140625 644.601806640625 1131.7996826171875 623.9016723632812Q1185.199951171875 603.2015380859375 1223.0001220703125 564.5012817382812Q1260.80029296875 525.801025390625 1281.200439453125 471.40069580078125Q1292.245361328125 441.9473571777344 1297.3104248046875 408.79998779296875H1353.33203125Q1344.3839111328125 477.8169860839844 1313.5987548828125 533.5Q1270.1988525390625 612.0 1192.5989379882812 656.0Q1114.9990234375 700.0 1012.9990234375 700.0ZM4895.947265625 202.3994140625 4850.7490234375 173.6004638671875Q4867.74853515625 125.2003173828125 4898.84814453125 83.30023193359375Q4929.94775390625 41.400146484375 4976.047607421875 16.10009765625Q5022.1474609375 -9.199951171875 5082.34765625 -9.199951171875Q5125.5478515625 -9.199951171875 5162.44775390625 4.60003662109375Q5199.34765625 18.4000244140625 5227.04736328125 43.5999755859375Q5254.7470703125 68.7999267578125 5270.2470703125 103.99981689453125Q5285.7470703125 139.19970703125 5285.7470703125 181.99951171875Q5285.7470703125 228.3994140625 5269.7470703125 261.89935302734375Q5253.7470703125 295.3992919921875 5228.04736328125 319.29925537109375Q5202.34716796875 343.19921875 5171.54736328125 359.19921875Q5169.60888671875 360.2061767578125 5167.662109375 361.20001220703125H5024.728515625Q5047.81982421875 350.76800537109375 5069.548828125 342.8006591796875Q5109.548828125 328.400634765625 5146.048828125 308.70050048828125Q5182.548828125 289.0003662109375 5205.548828125 257.8001708984375Q5228.548828125 226.5999755859375 5228.548828125 175.999755859375Q5228.548828125 118.399169921875 5189.94873046875 80.79876708984375Q5151.34814453125 43.1983642578125 5084.1474609375 43.1983642578125Q5033.34716796875 43.1983642578125 4997.346923828125 64.59857177734375Q4961.3466796875 85.998779296875 4937.046875 122.19903564453125Q4912.7470703125 158.3992919921875 4895.947265625 202.3994140625ZM3063.600341796875 361.20001220703125V114.196044921875L2849.3271484375 361.20001220703125H2781.136962890625L3118.99853515625 -26.99951171875V361.20001220703125H3063.600341796875ZM4944.99365234375 408.79998779296875H5055.380859375Q5034.55126953125 418.4354248046875 5017.447265625 428.499267578125Q4979.54736328125 450.79931640625 4960.547119140625 479.09954833984375Q4941.546875 507.3997802734375 4941.546875 545.600341796875Q4941.546875 593.201171875 4974.547119140625 624.5014038085938Q5007.54736328125 655.8016357421875 5068.94775390625 655.8016357421875Q5114.34814453125 655.8016357421875 5145.4482421875 638.6015625Q5176.54833984375 621.4014892578125 5196.948486328125 595.201416015625Q5217.3486328125 569.0013427734375 5228.74853515625 542.2012939453125L5276.94677734375 569.0003662109375Q5263.14697265625 602.8001708984375 5235.947265625 634.9000854492188Q5208.74755859375 667.0 5168.24755859375 688.0999755859375Q5127.74755859375 709.199951171875 5071.94775390625 709.199951171875Q5017.34814453125 709.199951171875 4974.748291015625 687.7000732421875Q4932.1484375 666.2001953125 4907.948486328125 627.8003540039062Q4883.74853515625 589.4005126953125 4883.74853515625 539.0006103515625Q4883.74853515625 494.2008056640625 4901.04833984375 462.20086669921875Q4917.92822265625 430.9783630371094 4944.99365234375 408.79998779296875ZM2808.03466796875 408.79998779296875 2532.000244140625 726.99951171875V408.79998779296875H2587.3984375V583.8038330078125L2739.70947265625 408.79998779296875H2808.03466796875ZM317.999267578125 600.403564453125 397.1647033691406 408.79998779296875H453.2446594238281L317.999267578125 726.99951171875L182.7538604736328 408.79998779296875H239.09019470214844ZM3623.999267578125 600.403564453125 3703.164794921875 408.79998779296875H3759.24462890625L3623.999267578125 726.99951171875L3488.75390625 408.79998779296875H3545.090087890625ZM2587.3984375 361.20001220703125H2532.000244140625V0.0H2587.3984375V361.20001220703125ZM4183.998046875 361.20001220703125H4129.0V0.0H4183.998046875V361.20001220703125ZM3063.600341796875 700.0V408.79998779296875H3118.99853515625V700.0ZM4129.0 700.0V408.79998779296875H4183.998046875V700.0ZM4523.0 700.0V490.0H4569.7001953125V700.0Z" stroke="none"/></g><g transform="translate(5644.3 0.0) scale(0.6000)" fill="var(--logo-ink)" stroke="var(--logo-ink)"><path d="M9.000244140625 460.0 187.7989501953125 -26.99951171875 323.5992431640625 356.4034423828125 468.1995849609375 -26.99951171875 646.998291015625 460.0H589.000244140625L464.5997314453125 102.5965576171875L322.999267578125 486.99951171875L190.798828125 103.7965087890625L66.998291015625 460.0Z M762.5985107421875 138.3997802734375Q762.5985107421875 172.600341796875 778.5987548828125 194.80059814453125Q794.5989990234375 217.0008544921875 823.2992553710938 228.00091552734375Q851.99951171875 239.0009765625 890.5994873046875 239.0009765625Q933.3995361328125 239.0009765625 971.599609375 227.700927734375Q1009.7996826171875 216.40087890625 1043.599609375 191.600830078125V225.0Q1035.3995361328125 234.0 1014.3994750976562 247.09991455078125Q993.3994140625 260.1998291015625 960.8994750976562 270.499755859375Q928.3995361328125 280.7996826171875 882.7998046875 280.7996826171875Q802.60009765625 280.7996826171875 756.3001708984375 241.8997802734375Q710.000244140625 202.9998779296875 710.000244140625 135.599853515625Q710.000244140625 87.3997802734375 732.2002563476562 54.99981689453125Q754.4002685546875 22.599853515625 790.1002197265625 6.2999267578125Q825.8001708984375 -10.0 865.0 -10Q905.400146484375 -10.0 944.1001586914062 7.00018310546875Q982.8001708984375 24.0003662109375 1008.7001342773438 59.20074462890625Q1034.60009765625 94.401123046875 1034.60009765625 148.001708984375L1022.600341796875 192.000732421875Q1022.600341796875 141.1998291015625 1002.7001953125 106.099365234375Q982.800048828125 70.9989013671875 950.2998657226562 53.19873046875Q917.7996826171875 35.3985595703125 878.799560546875 35.3985595703125Q847.3994140625 35.3985595703125 820.899169921875 46.4986572265625Q794.39892578125 57.5987548828125 778.4987182617188 80.5989990234375Q762.5985107421875 103.5992431640625 762.5985107421875 138.3997802734375ZM764.9993896484375 376.0013427734375Q777.99951171875 385.6014404296875 797.5995483398438 396.80145263671875Q817.1995849609375 408.00146484375 844.299560546875 416.00146484375Q871.3995361328125 424.00146484375 905.3995361328125 424.00146484375Q938.4002685546875 424.00146484375 961.2005004882812 415.201171875Q984.000732421875 406.40087890625 997.5006713867188 391.4005126953125Q1011.0006103515625 376.400146484375 1016.8004760742188 357.89996337890625Q1022.600341796875 339.3997802734375 1022.600341796875 319.4000244140625V0.0H1074.5986328125V325.999755859375Q1074.5986328125 372.1998291015625 1054.8988037109375 404.19989013671875Q1035.198974609375 436.199951171875 998.0991821289062 453.0999755859375Q960.9993896484375 470.0 908.5994873046875 470.0Q848.19970703125 470.0 806.4999389648438 451.60003662109375Q764.8001708984375 433.2000732421875 739.2001953125 414.60009765625Z M1588.9993896484375 460.0H1530.601318359375L1367.800048828125 70.39794921875L1391.99951171875 67.998046875L1224.7982177734375 460.0H1163.000244140625L1348.600830078125 46.9989013671875L1230.601318359375 -220.0H1288.9993896484375Z" stroke="none"/></g></g></symbol>
+    <symbol id="logo-closed" viewBox="0 0 6812.7 1083.0"><g transform="translate(103.0 839.0) scale(1 -1)"><g transform="translate(0.0 0.0) scale(1.0000)" fill="var(--logo-ink)" stroke="var(--logo-ink)"><path d="M139.799560546875 234.801513671875H498.9989013671875L480.9996337890625 286.7998046875H157.798828125ZM317.999267578125 600.403564453125 456.0003662109375 266.400390625 461.2001953125 253.2008056640625 565.2003173828125 0.0H626.998291015625L317.999267578125 726.99951171875L9.000244140625 0.0H70.7982177734375L176.3983154296875 256.8006591796875L181.59814453125 269.2003173828125Z M823.000244140625 700.0V0.0H878.3984375V700.0ZM1012.9990234375 0.0Q1114.9990234375 0.0 1192.5989379882812 44.0Q1270.1988525390625 88.0 1313.5987548828125 166.5Q1356.9986572265625 245.0 1356.9986572265625 350.0Q1356.9986572265625 455.0 1313.5987548828125 533.5Q1270.1988525390625 612.0 1192.5989379882812 656.0Q1114.9990234375 700.0 1012.9990234375 700.0H853.19921875V644.601806640625H1012.9990234375Q1078.3994140625 644.601806640625 1131.7996826171875 623.9016723632812Q1185.199951171875 603.2015380859375 1223.0001220703125 564.5012817382812Q1260.80029296875 525.801025390625 1281.2003784179688 471.40069580078125Q1301.6004638671875 417.0003662109375 1301.6004638671875 350.0Q1301.6004638671875 282.9996337890625 1281.2003784179688 228.59930419921875Q1260.80029296875 174.198974609375 1223.0001220703125 135.49871826171875Q1185.199951171875 96.7984619140625 1131.7996826171875 76.09832763671875Q1078.3994140625 55.398193359375 1012.9990234375 55.398193359375H853.19921875V0.0Z M1623.3983154296875 350.0Q1623.3983154296875 437.800537109375 1660.698486328125 506.200927734375Q1697.9986572265625 574.601318359375 1763.5989990234375 614.2015380859375Q1829.1993408203125 653.8017578125 1912.7998046875 653.8017578125Q1997.4002685546875 653.8017578125 2062.5006103515625 614.2015380859375Q2127.6009521484375 574.601318359375 2164.901123046875 506.200927734375Q2202.2012939453125 437.800537109375 2202.2012939453125 350.0Q2202.2012939453125 262.5994873046875 2164.901123046875 193.99908447265625Q2127.6009521484375 125.398681640625 2062.5006103515625 85.7984619140625Q1997.4002685546875 46.1982421875 1912.7998046875 46.1982421875Q1829.1993408203125 46.1982421875 1763.5989990234375 85.7984619140625Q1697.9986572265625 125.398681640625 1660.698486328125 193.99908447265625Q1623.3983154296875 262.5994873046875 1623.3983154296875 350.0ZM1565.000244140625 350.0Q1565.000244140625 273.199951171875 1590.9002075195312 207.39996337890625Q1616.8001708984375 141.5999755859375 1663.8001098632812 93.29998779296875Q1710.800048828125 45.0 1774.3999633789062 17.9000244140625Q1837.9998779296875 -9.199951171875 1912.7998046875 -9.199951171875Q1988.19970703125 -9.199951171875 2051.4996337890625 17.9000244140625Q2114.799560546875 45.0 2161.7994995117188 93.29998779296875Q2208.7994384765625 141.5999755859375 2234.6994018554688 207.39996337890625Q2260.599365234375 273.199951171875 2260.599365234375 350.0Q2260.599365234375 427.4000244140625 2234.6994018554688 492.9000244140625Q2208.7994384765625 558.4000244140625 2161.7994995117188 606.7000122070312Q2114.799560546875 655.0 2051.4996337890625 682.0999755859375Q1988.19970703125 709.199951171875 1912.7998046875 709.199951171875Q1837.9998779296875 709.199951171875 1774.3999633789062 682.0999755859375Q1710.800048828125 655.0 1663.8001098632812 606.7000122070312Q1616.8001708984375 558.4000244140625 1590.9002075195312 492.9000244140625Q1565.000244140625 427.4000244140625 1565.000244140625 350.0Z M3063.600341796875 700.0V114.196044921875L2532.000244140625 726.99951171875V0.0H2587.3984375V583.8038330078125L3118.99853515625 -26.99951171875V700.0Z M3445.799560546875 234.801513671875H3804.9989013671875L3786.9996337890625 286.7998046875H3463.798828125ZM3623.999267578125 600.403564453125 3762.0003662109375 266.400390625 3767.2001953125 253.2008056640625 3871.2003173828125 0.0H3932.998291015625L3623.999267578125 726.99951171875L3315.000244140625 0.0H3376.7982177734375L3482.3983154296875 256.8006591796875L3487.59814453125 269.2003173828125Z M4129.0001220703125 700.0V0.0H4183.998291015625V700.0Z M 4523.0 700.0 L 4569.7 700.0 L 4569.7 490.0 L 4523.0 490.0 Z M4895.947418212891 202.3994140625 4850.748809814453 173.6004638671875Q4867.748443603516 125.2003173828125 4898.848114013672 83.30023193359375Q4929.947784423828 41.400146484375 4976.047637939453 16.10009765625Q5022.147491455078 -9.199951171875 5082.347686767578 -9.199951171875Q5125.547760009766 -9.199951171875 5162.447662353516 4.60003662109375Q5199.347564697266 18.4000244140625 5227.047393798828 43.5999755859375Q5254.747222900391 68.7999267578125 5270.247100830078 103.99981689453125Q5285.746978759766 139.19970703125 5285.746978759766 181.99951171875Q5285.746978759766 228.3994140625 5269.747039794922 261.89935302734375Q5253.747100830078 295.3992919921875 5228.047149658203 319.29925537109375Q5202.347198486328 343.19921875 5171.547210693359 359.19921875Q5140.747222900391 375.19921875 5111.547149658203 385.999267578125Q5055.347442626953 406.19921875 5017.447296142578 428.499267578125Q4979.547149658203 450.79931640625 4960.546905517578 479.09954833984375Q4941.546661376953 507.3997802734375 4941.546661376953 545.600341796875Q4941.546661376953 593.201171875 4974.547088623047 624.5014038085938Q5007.547515869141 655.8016357421875 5068.947784423828 655.8016357421875Q5114.348052978516 655.8016357421875 5145.448211669922 638.6015625Q5176.548370361328 621.4014892578125 5196.948394775391 595.201416015625Q5217.348419189453 569.0013427734375 5228.748321533203 542.2012939453125L5276.946807861328 569.0003662109375Q5263.147003173828 602.8001708984375 5235.947174072266 634.9000854492188Q5208.747344970703 667.0 5168.247467041016 688.0999755859375Q5127.747589111328 709.199951171875 5071.947662353516 709.199951171875Q5017.347930908203 709.199951171875 4974.748138427734 687.7000732421875Q4932.148345947266 666.2001953125 4907.948455810547 627.8003540039062Q4883.748565673828 589.4005126953125 4883.748565673828 539.0006103515625Q4883.748565673828 494.2008056640625 4901.048492431641 462.20086669921875Q4918.348419189453 430.200927734375 4946.348358154297 407.700927734375Q4974.348297119141 385.200927734375 5006.948333740234 369.5008544921875Q5039.548370361328 353.80078125 5069.548614501953 342.8006591796875Q5109.548614501953 328.400634765625 5146.048675537109 308.70050048828125Q5182.548736572266 289.0003662109375 5205.548797607422 257.8001708984375Q5228.548858642578 226.5999755859375 5228.548858642578 175.999755859375Q5228.548858642578 118.399169921875 5189.948577880859 80.79876708984375Q5151.348297119141 43.1983642578125 5084.147613525391 43.1983642578125Q5033.347076416016 43.1983642578125 4997.346893310547 64.59857177734375Q4961.346710205078 85.998779296875 4937.046844482422 122.19903564453125Q4912.746978759766 158.3992919921875 4895.947418212891 202.3994140625Z" stroke="none"/></g><g transform="translate(5644.3 0.0) scale(0.6000)" fill="var(--logo-ink)" stroke="var(--logo-ink)"><path d="M9.000244140625 460.0 187.7989501953125 -26.99951171875 323.5992431640625 356.4034423828125 468.1995849609375 -26.99951171875 646.998291015625 460.0H589.000244140625L464.5997314453125 102.5965576171875L322.999267578125 486.99951171875L190.798828125 103.7965087890625L66.998291015625 460.0Z M762.5985107421875 138.3997802734375Q762.5985107421875 172.600341796875 778.5987548828125 194.80059814453125Q794.5989990234375 217.0008544921875 823.2992553710938 228.00091552734375Q851.99951171875 239.0009765625 890.5994873046875 239.0009765625Q933.3995361328125 239.0009765625 971.599609375 227.700927734375Q1009.7996826171875 216.40087890625 1043.599609375 191.600830078125V225.0Q1035.3995361328125 234.0 1014.3994750976562 247.09991455078125Q993.3994140625 260.1998291015625 960.8994750976562 270.499755859375Q928.3995361328125 280.7996826171875 882.7998046875 280.7996826171875Q802.60009765625 280.7996826171875 756.3001708984375 241.8997802734375Q710.000244140625 202.9998779296875 710.000244140625 135.599853515625Q710.000244140625 87.3997802734375 732.2002563476562 54.99981689453125Q754.4002685546875 22.599853515625 790.1002197265625 6.2999267578125Q825.8001708984375 -10.0 865.0 -10Q905.400146484375 -10.0 944.1001586914062 7.00018310546875Q982.8001708984375 24.0003662109375 1008.7001342773438 59.20074462890625Q1034.60009765625 94.401123046875 1034.60009765625 148.001708984375L1022.600341796875 192.000732421875Q1022.600341796875 141.1998291015625 1002.7001953125 106.099365234375Q982.800048828125 70.9989013671875 950.2998657226562 53.19873046875Q917.7996826171875 35.3985595703125 878.799560546875 35.3985595703125Q847.3994140625 35.3985595703125 820.899169921875 46.4986572265625Q794.39892578125 57.5987548828125 778.4987182617188 80.5989990234375Q762.5985107421875 103.5992431640625 762.5985107421875 138.3997802734375ZM764.9993896484375 376.0013427734375Q777.99951171875 385.6014404296875 797.5995483398438 396.80145263671875Q817.1995849609375 408.00146484375 844.299560546875 416.00146484375Q871.3995361328125 424.00146484375 905.3995361328125 424.00146484375Q938.4002685546875 424.00146484375 961.2005004882812 415.201171875Q984.000732421875 406.40087890625 997.5006713867188 391.4005126953125Q1011.0006103515625 376.400146484375 1016.8004760742188 357.89996337890625Q1022.600341796875 339.3997802734375 1022.600341796875 319.4000244140625V0.0H1074.5986328125V325.999755859375Q1074.5986328125 372.1998291015625 1054.8988037109375 404.19989013671875Q1035.198974609375 436.199951171875 998.0991821289062 453.0999755859375Q960.9993896484375 470.0 908.5994873046875 470.0Q848.19970703125 470.0 806.4999389648438 451.60003662109375Q764.8001708984375 433.2000732421875 739.2001953125 414.60009765625Z M1588.9993896484375 460.0H1530.601318359375L1367.800048828125 70.39794921875L1391.99951171875 67.998046875L1224.7982177734375 460.0H1163.000244140625L1348.600830078125 46.9989013671875L1230.601318359375 -220.0H1288.9993896484375Z" stroke="none"/></g></g></symbol>
+    <symbol id="aperture" viewBox="0 0 1120.0 1120.0"><g transform="translate(560.0 966.0) scale(1 -1)"><g transform="translate(0.0 0.0) scale(1.0000)" fill="var(--logo-ink)" stroke="var(--logo-ink)"><path d="M -175.00 0.00 L -175.00 361.20 M -175.00 408.80 L -175.00 637.00 A 175.00 175.00 0 0 0 175.00 637.00 L 175.00 408.80 M 175.00 361.20 L 175.00 0.00" fill="none" stroke-width="47.3" stroke-linecap="butt" stroke-linejoin="miter"/></g></g></symbol>
+    <symbol id="seal" viewBox="0 0 980.0 980.0"><g transform="translate(490.0 840.0) scale(1 -1)"><g transform="translate(0.0 0.0) scale(1.0000)" fill="var(--logo-ink)" stroke="var(--logo-ink)"><path d="M -295.7 23.6 L 295.7 23.6" fill="none" stroke-width="47.3" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M -100.8 52.0 C -315.8 182.0 -302.4 490.0 -37.0 700.0" fill="none" stroke-width="47.3" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M 100.8 52.0 C 315.8 182.0 302.4 490.0 37.0 700.0" fill="none" stroke-width="47.3" stroke-linecap="butt" stroke-linejoin="miter"/></g></g></symbol>
+  </defs>
+</svg>
+
+<!-- ---------- NAVIGATION ---------- -->
+<header class="nav" id="nav">
+  <span class="nav-progress" id="navProgress" aria-hidden="true"></span>
+  <a class="brand" href="#home" aria-label="Adonai&rsquo;s Way Foundation, home">
+    <svg class="lg-open" viewBox="0 0 6812.7 1083" aria-hidden="true"><use href="#logo"/></svg>
+    <svg class="lg-closed" viewBox="0 0 6812.7 1083" aria-hidden="true"><use href="#logo-closed"/></svg>
+  </a>
+  <nav aria-label="Primary">
+    <ul class="nav-links" id="navlinks">
+      <li><a href="#way">The Way</a></li>
+      <li><a href="#charities">Charities</a></li>
+      <li><a href="#trust">Due Diligence</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="nav-right">
+    <button class="light" id="themeBtn" type="button" role="switch" aria-checked="true">
+      <span class="vh" id="themeLabel">Evening light is on. Switch to day.</span>
+      <span class="light-track" aria-hidden="true">
+        <span class="sky-stars"></span>
+        <span class="sky-cloud"></span>
+        <span class="sky-water"></span>
+        <svg class="sky-reeds" viewBox="0 0 60 12"><path d="M2 12c.4-3.6.2-6.2-.6-8.4M6.6 12c-.2-4 .1-6.6 1-9M11 12c.5-3 .3-5.2-.4-7.2M15.8 12c-.3-4.4 0-7 1.1-9.4M20.4 12c.4-3.2.2-5.6-.5-7.6M25 12c-.2-4.2.1-6.8 1-9.2M29.6 12c.5-2.8.3-5-.4-6.8M34.4 12c-.3-4 0-6.6 1.1-8.8M39 12c.4-3.4.2-5.8-.5-7.8M43.6 12c-.2-3.8.1-6.2 1-8.4M48.2 12c.5-2.6.3-4.6-.4-6.2M53 12c-.3-4.2 0-6.8 1.1-9M57.6 12c.4-3-.1-5.2-.8-6.8"/></svg>
+        <span class="light-knob"></span>
+      </span>
+      <span class="light-label" id="lightLabel" aria-hidden="true">Dusk</span>
+    </button>
+    <a class="btn btn-give" href="#donate">Donate</a>
+    <button class="nav-toggle" id="navtoggle" type="button" aria-expanded="false" aria-controls="navlinks">
+      <span></span><span class="vh">Menu</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================================================
+     HERO - one real photograph and a sun that moves.
+============================================================ -->
+<section class="hero grain" id="home">
+  <picture><source type="image/webp" sizes="100vw" srcset="assets/hero-wetland-dusk-900.webp 900w, assets/hero-wetland-dusk-1600.webp 1600w, assets/hero-wetland-dusk.webp 2752w">
+    <img class="hero-img -dusk" id="heroDusk" src="assets/hero-wetland-dusk.jpg" alt="A weathered wooden boardwalk running out over a Florida wetland to a viewing platform, the sun setting behind the far treeline." decoding="async" fetchpriority="high"></picture>
+  <picture><source type="image/webp" sizes="100vw" srcset="assets/hero-wetland-day-900.webp 900w, assets/hero-wetland-day-1600.webp 1600w, assets/hero-wetland-day.webp 2752w">
+    <img class="hero-img -day" id="heroDay" src="assets/hero-wetland-day.jpg" alt="" aria-hidden="true" decoding="async" fetchpriority="low"></picture>
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <div class="hero-say">
+    <div class="hero-copy">
+      <h1 class="hero-line">Giving is easy. <em>Knowing</em> where is not.</h1>
+      <p class="hero-sub">We check every charity ourselves. Seven causes, thirteen partners, and all of your gift reaches the one you choose.</p>
+      <div class="hero-cta">
+        <a class="btn btn-give" href="#charities">Choose a cause <span class="arw" aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn-quiet" href="#trust">How we choose</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- THE WAY ---------- -->
+<section class="pad on-paper idea center" id="way">
+  <!-- the lotus, once on the page, large and at eight per cent. Sheet 13. -->
+  <svg class="seal-watermark" viewBox="0 0 980 980" aria-hidden="true"><use href="#seal"/></svg>
+  <div class="shell">
+    <p class="kicker rise">A channel for light</p>
+    <p class="verse rise -d1">Every dollar that arrives here <em>leaves</em> here.</p>
+    <p class="lead rise -d2">Adonai&rsquo;s Way is a grant-making foundation. It runs no programmes, employs nobody in the field and builds nothing of its own. Its whole job is choosing well, and then getting out of the way of the work.</p>
+    <p class="lead rise -d3" style="margin-top:1.15em">Adonai means Lord, and a way is the passage between. That is all this is: money in, money out, and a written reason for every decision before the money moves.</p>
+    <p class="name-note rise -d4">Seven causes, thirteen charities. Each one was chosen after our own due diligence, and each is named on this page with a link so you can judge it yourself.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     CHARITIES WE SUPPORT - the index of seven causes.
+============================================================ -->
+<section class="pad causes" id="charities">
+  <div class="shell">
+    <div class="causes-head">
+      <h2 class="rise">Choose a cause. The hard part is already done.</h2>
+      <p class="lead rise -d2">Behind each cause are the charities that came through our diligence: registration confirmed, three years of accounts read, programme evidence tested, safeguarding checked.</p>
+    </div>
+    <div class="index rise -d2">
+      <ol class="index-list" id="causeList" role="list"></ol>
+      <aside class="plate" id="plate" aria-live="polite"></aside>
+    </div>
+    <p class="index-note rise">Every charity here was read and chosen by the foundation, and every name links to its own site so you can judge it yourself.</p>
+  </div>
+</section>
+
+<!-- ---------- WHY TRUST US ---------- -->
+<section class="pad trust" id="trust">
+  <div class="shell trust-grid">
+    <div class="trust-intro">
+      <h2 class="rise -d1">We read the accounts before the money moves.</h2>
+      <p class="lead rise -d2" style="margin-top:24px">Most foundations tell you where the money went. We can tell you why it went there, who looked, and what would have stopped it.</p>
+      <blockquote class="pull rise -d3">Authentic, reliable, trustworthy. That we donate while ensuring the quality and integrity of our partners through our own due diligence.<cite>Margaux Primat, Founder</cite></blockquote>
+    </div>
+    <ol class="steps rise -d1">
+      <li><div><h3>Referral and shortlist</h3><p>A charity reaches us through a partner, a beneficiary or our own search. We place it against one of the seven causes, and against what that cause still needs.</p></div></li>
+      <li><div><h3>Registration and accounts</h3><p>Registered status confirmed with the regulator in its own country. Three years of filed accounts read in full: reserves, income concentration, cost ratios.</p></div></li>
+      <li><div><h3>Programme evidence</h3><p>What they actually do, who they reach, and what changed as a result. We ask for the numbers behind the story, and we speak to people the charity did not choose for us.</p></div></li>
+      <li><div><h3>Governance and safeguarding</h3><p>Board composition, conflicts of interest, safeguarding policy and its record. A charity that cannot show us this is not funded, however good the work looks.</p></div></li>
+      <li><div><h3>Decision, then review</h3><p>Every funded partner is reviewed each year against what they told us. Continued funding is earned rather than assumed, and we say so before the first grant.</p></div></li>
+    </ol>
+  </div>
+
+  <div class="shell ledger">
+    <h3 class="rise">Where the money goes.</h3>
+    <p class="ledger-note rise -d1">No grant has been made yet, so there are no results to show and we will not dress a projection up as one. These are the terms we are bound to, and the date each becomes something you can check.</p>
+    <div class="ledger-grid">
+      <div class="rise -d1">
+        <span class="fig">100%</span>
+        <span class="k">Of your gift</span>
+        <span class="v">Reaches the cause you chose. The founder pays the running costs separately, and nothing is taken from a donation.</span>
+      </div>
+      <div class="rise -d2">
+        <span class="fig">Annual</span>
+        <span class="k">Published accounts</span>
+        <span class="v">Income, grants made and costs, filed with the regulator and posted here in full the same day.
+          <span class="pending">First filing due after year one</span></span>
+      </div>
+      <div class="rise -d3">
+        <span class="fig">Named</span>
+        <span class="k">Every grant</span>
+        <span class="v">Recipient, amount, and the reasoning written down before the money moved. Published as each grant is made.
+          <span class="pending">Opens with the first grant</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- STATEMENT ---------- -->
+<!-- The same wetland as the hero, held low under a wash so the quote carries:
+     low horizon, generous sky, and room left for the words. -->
+<section class="statement grain" aria-label="From the founder">
+  <picture><source type="image/webp" sizes="100vw" srcset="assets/hero-wetland-dusk-900.webp 900w, assets/hero-wetland-dusk-1600.webp 1600w, assets/hero-wetland-dusk.webp 2752w">
+    <img class="-dusk" src="assets/hero-wetland-dusk.jpg" alt="" aria-hidden="true" loading="lazy"></picture>
+  <picture><source type="image/webp" sizes="100vw" srcset="assets/hero-wetland-day-900.webp 900w, assets/hero-wetland-day-1600.webp 1600w, assets/hero-wetland-day.webp 2752w">
+    <img class="-day" src="assets/hero-wetland-day.jpg" alt="" aria-hidden="true" loading="lazy"></picture>
+  <div class="shell">
+    <blockquote class="rise">Whatever has happened in a person&rsquo;s life, the situation can be turned around.</blockquote>
+    <cite class="rise -d2">Margaux Primat, Founder</cite>
+  </div>
+</section>
+
+<!-- ---------- FEATURED PARTNERS ---------- -->
+<section class="pad on-paper" id="partners">
+  <div class="shell">
+    <div class="partners-head">
+      <h2 class="rise" style="max-width:18ch">Three of the charities you would be funding.</h2>
+      <p class="partners-note rise -d1">One from each of three causes. The other ten are in the index above.</p>
+    </div>
+    <div class="hang" id="partnersGrid"></div>
+  </div>
+</section>
+
+<!-- ---------- ABOUT ---------- -->
+<section class="pad on-paper-2 about" id="about">
+  <div class="shell about-grid">
+    <div>
+      <figure class="portrait -photo rise">
+        <picture><source type="image/webp" srcset="assets/founder-margaux.webp">
+          <img class="portrait-img" src="assets/founder-margaux.jpg" width="410" height="512" alt="Margaux Primat, founder of Adonai&rsquo;s Way Foundation, seated by a sunlit window." loading="lazy" decoding="async"></picture>
+        <figcaption><b>Margaux Primat</b><span>Founder</span></figcaption>
+      </figure>
+      <ul class="facts rise -d1" role="list">
+        <li><span class="k">Founded</span><span class="v">2026</span></li>
+        <li><span class="k">Model</span><span class="v">Grant-making only</span></li>
+        <li><span class="k">Causes</span><span class="v">Seven</span></li>
+        <li><span class="k">Registration</span><span class="v"><span class="pending">Pending</span></span></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="rise">A foundation that gives, and shows its working.</h2>
+      <p class="lead rise -d2" style="margin-top:26px">The difficulty in giving is not generosity. It is knowing. Most people who want to help cannot tell a good charity from a well-marketed one, and have no time to find out.</p>
+      <p class="lead rise -d3" style="margin-top:1.15em">So the foundation does the finding out. Reading the accounts, testing the evidence, meeting the people, and funding the ones that hold up.</p>
+
+      <h3 class="rise">How we work</h3>
+      <p class="rise">Money in, money out, and nothing taken along the way that is not disclosed. Grants are made against the seven causes, partners are reviewed every year, and the reasoning is written down before the grant, not after.</p>
+
+      <h3 class="rise">What we fund</h3>
+      <p class="rise">Homelessness, and the dignity that follows a door you can close. Children&rsquo;s education. Brain and neurological research. Veterans. Survivors of trauma and abuse. Psychedelic research, held to the same evidential standard as any other medicine. Animals and conservation, for the creatures and coastlines that cannot brief a lawyer. Seven causes, each chosen because funding moves the needle further there than it does elsewhere.</p>
+
+      <h3 class="rise">Governance</h3>
+      <p class="rise">Registered status, structure, trustee details and the flow of funds are published here in full once registration is confirmed. Solicitation disclosures appear in the footer of every page.</p>
+      <p class="rise" style="margin-top:16px"><span class="pending">Governance detail pending registration</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- CONTACT ---------- -->
+<section class="pad contact" id="contact">
+  <div class="shell">
+    <h2 class="rise" style="max-width:14ch;margin-bottom:50px">Donor, partner or press.</h2>
+    <div class="form-grid">
+      <form id="contactForm" novalidate class="rise -d2">
+        <div class="field">
+          <label for="f-subject">I am writing as</label>
+          <select id="f-subject" name="subject" required>
+            <option value="donor">A donor</option>
+            <option value="partner">A charity or funder</option>
+            <option value="press">Press</option>
+          </select>
+        </div>
+        <div class="field"><label for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name">
+          <p class="err" id="e-name" hidden></p></div>
+        <div class="field"><label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="h-email e-email">
+          <p class="hint" id="h-email">We reply to everything, usually within two working days.</p>
+          <p class="err" id="e-email" hidden></p></div>
+        <div class="field"><label for="f-message">Message</label>
+          <textarea id="f-message" name="message" required aria-describedby="e-message"></textarea>
+          <p class="err" id="e-message" hidden></p></div>
+        <button class="btn btn-give" type="submit">Send message <span class="arw" aria-hidden="true">&rarr;</span></button>
+        <p class="form-status" id="formStatus" role="status"></p>
+        <p class="form-note">Form handler not yet connected. The endpoint is configured at launch.</p>
+      </form>
+      <div class="reach rise -d3">
+        <dl>
+          <dt>Email</dt><dd><a href="mailto:hello@adonaisway.org">hello@adonaisway.org</a></dd>
+          <dt>Partnerships</dt><dd><a href="mailto:partners@adonaisway.org">partners@adonaisway.org</a></dd>
+          <dt>Press</dt><dd><a href="mailto:press@adonaisway.org">press@adonaisway.org</a></dd>
+          <dt>Postal address</dt><dd><span class="pending">Pending, required for solicitation disclosure</span></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- DONATE ---------- -->
+<section class="cta grain" id="donate">
+  <picture><source type="image/webp" sizes="100vw" srcset="assets/hero-wetland-dusk-900.webp 900w, assets/hero-wetland-dusk-1600.webp 1600w, assets/hero-wetland-dusk.webp 2752w">
+    <img class="cta-img -dusk" src="assets/hero-wetland-dusk.jpg" alt="" aria-hidden="true" loading="lazy"></picture>
+  <picture><source type="image/webp" sizes="100vw" srcset="assets/hero-wetland-day-900.webp 900w, assets/hero-wetland-day-1600.webp 1600w, assets/hero-wetland-day.webp 2752w">
+    <img class="cta-img -day" src="assets/hero-wetland-day.jpg" alt="" aria-hidden="true" loading="lazy"></picture>
+  <div class="shell">
+    <p class="kicker rise">Give</p>
+    <h2 class="rise -d1">You choose the cause. We have already chosen the charity.</h2>
+    <p class="lead rise -d2">Nothing here is passed on that we would not fund ourselves.</p>
+    <a class="btn btn-first rise -d3" href="#charities">Choose a cause <span class="arw" aria-hidden="true">&rarr;</span></a>
+    <p class="cta-note rise -d4">Your gift comes to the foundation and goes out to the charity you chose. The founder meets the running costs separately, so the whole of it travels. Giving opens once charitable registration is confirmed, and the ways to give will be listed here.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="shell">
+    <div class="foot-grid">
+      <div>
+        <a class="foot-brand" href="#home" aria-label="Adonai&rsquo;s Way Foundation, home">
+          <svg viewBox="0 0 6812.7 1083" aria-hidden="true"><use href="#logo"/></svg>
+        </a>
+        <p class="foot-blurb">A channel for light. We choose, check and fund charities across seven causes, and we publish how we chose them.</p>
+      </div>
+      <div><h4>Pages</h4><ul>
+        <li><a href="#way">The Way</a></li><li><a href="#charities">Charities We Support</a></li>
+        <li><a href="#trust">Due Diligence</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li>
+      </ul></div>
+      <div><h4>Causes</h4><ul id="footCauses"></ul></div>
+      <div><h4>Foundation</h4><ul>
+        <li><a href="mailto:hello@adonaisway.org">hello@adonaisway.org</a></li>
+        <li><span class="pending">Registration pending</span></li>
+        <li><span class="pending">Postal address pending</span></li>
+      </ul></div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Adonai&rsquo;s Way Foundation. All rights reserved.</span>
+      <span>Registered charitable status and solicitation disclosures published on confirmation.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+'use strict'
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
+const KEY = 'adonai:light'
+const $  = s => document.querySelector(s)
+const $$ = s => [...document.querySelectorAll(s)]
+let THEME = document.documentElement.getAttribute('data-theme') === 'day' ? 'day' : 'dusk'
+
+/* ============================================================
+   THE SEVEN CAUSES. `icon` is a 24x24 stroke glyph.
+============================================================ */
+const CAUSES = [
+  { id:'homelessness', name:'Homelessness', short:'Homelessness',
+    why:'Shelter first, and every part of a life that only becomes possible once someone has a door to close.',
+    icon:'M3 11.6 12 4l9 7.6M5.6 10.2V19.6h12.8V10.2M10 19.6v-5.2h4v5.2' },
+  { id:'education', name:'Children&rsquo;s Education', short:'Education',
+    why:'A classroom is still the cheapest thing anyone has ever invented for changing the direction of a life.',
+    icon:'M12 6.6C10 5.1 7.4 4.7 4 5.1v12.6c3.4-.4 6 0 8 1.6 2-1.6 4.6-2 8-1.6V5.1c-3.4-.4-6 0-8 1.5M12 6.6v12.7' },
+  { id:'brain', name:'Brain &amp; Neurological Research', short:'Brain Research',
+    why:'The frontier where medicine is still being written, and where a small grant still moves the edge of it.',
+    icon:'M12 4.4a3.9 3.9 0 0 0-3.9 3.6A2.9 2.9 0 0 0 7 13.5v2.2a3.8 3.8 0 0 0 5 3.7M12 4.4a3.9 3.9 0 0 1 3.9 3.6A2.9 2.9 0 0 1 17 13.5v2.2a3.8 3.8 0 0 1-5 3.7M12 4.4v15M8.6 9.6h2.2M13.2 12.4h2.4' },
+  { id:'veterans', name:'Veterans', short:'Veterans',
+    why:'Service does not end at discharge. Support should not either, and too often it does.',
+    icon:'M12 3.6 20 6.6v5.9c0 4.3-3.3 7.3-8 8.8-4.7-1.5-8-4.5-8-8.8V6.6zM9.2 11.8l2.1 2.2 3.6-4' },
+  { id:'survivors', name:'Survivors of Trauma&nbsp;&amp;&nbsp;Abuse', short:'Trauma &amp; Abuse',
+    why:'Safety first, then advocacy, then the long road back. Recovery is slow work, and it needs money patient enough to wait for it.',
+    icon:'M12 8.2a2.9 2.9 0 1 1 0 5.8 2.9 2.9 0 0 1 0-5.8zM4.8 19.4c0-3 3.2-5.4 7.2-5.4s7.2 2.4 7.2 5.4M5.9 8.4A7 7 0 0 1 12 4.6a7 7 0 0 1 6.1 3.8' },
+  { id:'psychedelic', name:'Psychedelic Research', short:'Psychedelic Research',
+    why:'Rigorous science on treatments for the people conventional medicine has already run out of answers for.',
+    icon:'M12 4.8c2.3 3.1 3.3 6.6 0 10.9-3.3-4.3-2.3-7.8 0-10.9zM12 15.7C8.5 15.2 5.6 13 4.8 9.5c3.5.3 6.2 2.2 7.2 6.2zM12 15.7c3.5-.5 6.4-2.7 7.2-6.2-3.5.3-6.2 2.2-7.2 6.2zM4.4 18.6c2.5-1.4 12.7-1.4 15.2 0' },
+  { id:'animals', name:'Animals &amp; Conservation', short:'Animals &amp; Conservation',
+    why:'The creatures and the coastlines that cannot brief a lawyer, raise a petition or speak at a hearing.',
+    icon:'M6.6 7.8a1.4 1.8 0 0 1 0 3.6 1.4 1.8 0 0 1 0-3.6M10.2 6a1.5 1.9 0 0 1 0 3.8 1.5 1.9 0 0 1 0-3.8M13.8 6a1.5 1.9 0 0 1 0 3.8 1.5 1.9 0 0 1 0-3.8M17.4 7.8a1.4 1.8 0 0 1 0 3.6 1.4 1.8 0 0 1 0-3.6M12 12.4c2.9 0 5 2.1 5 4.3 0 1.7-1.4 2.9-3 2.9-1.1 0-1.5-.5-2-.5s-.9.5-2 .5c-1.6 0-3-1.2-3-2.9 0-2.2 2.1-4.3 5-4.3z' },
+]
+
+/* The confirmed directory. Every line here is drawn from the charity's own
+   site; nothing is written from memory and no figures are quoted. A cause
+   with no entry stays in the index anyway, because a named gap is more use
+   to a donor than a quiet omission. */
+const DIRECTORY = {
+  homelessness:[
+    { crest:'PR', name:'Providence Row', url:'https://www.providencerow.org.uk',
+      desc:'Outreach, mental health care and psychotherapy for people who are homeless in east London. Not to be confused with Providence Row Housing Association.' },
+    { crest:'MM', name:'The Midnight Mission', url:'https://www.midnightmission.org',
+      desc:'Emergency provision, recovery programmes and the long route back to work and housing for people living on the streets of Los Angeles.' },
+  ],
+  education:[
+    { crest:'IC', name:'International Care Ministries', url:'https://www.caremin.com',
+      desc:'Works with families living in ultra-poverty in the Philippines, teaching health, values and livelihood together, and treating malnutrition in the children among them.' },
+    { crest:'IN', name:'INFIИITE', url:'https://www.infinite.study',
+      desc:'An endowment fund for talented students from underprivileged backgrounds: an interest-free loan of up to €50,000 with no guarantor, a mentor for the whole journey, and outreach against the self-censorship that stops such students applying at all.' },
+  ],
+  brain:[
+    { crest:'IS', name:'InnerScience Research Fund', url:'https://innerscienceresearch.org',
+      desc:'Funds scientific research into the effects of meditation on the human body, and publishes the organisations and researchers it backs.' },
+  ],
+  veterans:[
+    { crest:'WH', name:'Warriors Heart', url:'https://www.warriorsheart.com',
+      desc:'Addiction and trauma recovery built for active military, veterans and first responders, treated together rather than in a general programme.' },
+  ],
+  survivors:[
+    { crest:'QS', name:'Quiet Spaces Ministry', url:'https://www.quietspacesministry.com',
+      desc:'One-to-one prayer ministry for people carrying spiritual and personal suffering, and advice for pastors meeting the same in their own congregations. Small on purpose.' },
+  ],
+  psychedelic:[
+    { crest:'MA', name:'MAPS', url:'https://maps.org',
+      desc:'The Multidisciplinary Association for Psychedelic Studies, which has carried psychedelic-assisted therapy through formal clinical research since 1986.' },
+  ],
+  animals:[
+    { crest:'PW', name:'Captain Paul Watson Foundation', url:'https://www.paulwatsonfoundation.org',
+      desc:'Direct-action ocean conservation, at sea since 1977, intervening against commercial whaling and the industrial emptying of the oceans.' },
+    { crest:'HW', name:'Humane World for Animals', url:'https://www.humaneworld.org',
+      desc:'Formerly the Humane Society of the United States. Works to end animal cruelty in all its forms, from the fur trade to factory farming.' },
+    { crest:'PA', name:'Performing Animal Welfare Society', url:'https://www.pawsweb.org',
+      desc:'A true sanctuary for captive wild animals, elephants, tigers and bears among them, which does not breed, buy, sell or trade a single one.' },
+    { crest:'BF', name:'Beagle Freedom Project', url:'https://bfp.org',
+      desc:'Rescues, rehabilitates and rehomes animals released from laboratories, including the seniors and survivors nobody else takes.' },
+    { crest:'GB', name:'The Gentle Barn', url:'https://www.gentlebarn.org',
+      desc:'Sanctuary for rescued farm animals, opened to the public so that kindness toward them is something people meet rather than read about.' },
+  ],
+}
+const glyph = (d, cls) => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true"><path d="${d}"/></svg>`
+const EXT = `<svg class="ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5H18v8.6M18 5.5 9.8 13.8M15 18.5H5.5V9"/></svg>`
+
+/* ============================================================
+   HERO - one Florida wetland, a boardwalk out to a viewing
+   platform, in daylight and at sunset from the same position. The
+   two frames register to the pixel, so they can be blended without
+   the ghosting that two different photographs give. Everything is
+   measured in the photograph's own uv space (0,0 bottom left) so it
+   holds at any crop.
+
+   SHORE is the mirror line, the level of the far water under the
+   treeline. RIDGE is the skyline, traced from both frames at every
+   fourth column of the 2752 x 1536 master and written in pixels
+   from the top. The sun is drawn only where there is sky, so at
+   dusk it goes down behind the trees, at the bright point on the
+   treeline the sunset photograph has it, instead of fading out in
+   front of them. For day it climbs out of the top of the frame,
+   which is where the daylight photograph's glare says it is.
+
+   Below the treeline this is not a lake. It is marsh grass, a
+   boardwalk and a few open pools, so the water is a mask
+   (hero-wetland-water.png) traced from the pools in both frames:
+   the swell, the reflection and the pointer's ripples live inside
+   it, and the grass and the timber never move.
+============================================================ */
+const HERO = {
+  shore:0.588, horizon:0.592, pos:[0.5, 0.5],
+  setX:0.50, edge:0.075, lean:-0.06,
+  /* sheltered marsh pools, not open water: the swell is a third of what the
+     lake carried, so lily pads and reflections hold their shape */
+  camH:0.10, amp:0.0016, glint:0.08, swell:1.4, swellSpeed:0.3,
+  ripFreq:40, ripDecay:1.8, ripSize:3.0, ripAmp:0.5,
+  reach:1.0, band:0.8,
+  travel:5200,
+}
+const RIDGE_H = 1536
+const RIDGE = '615,615,610,610,610,609,607,604,604,612,612,612,604,602,602,602,603,608,613,616,619,621,621,608,608,611,611,605,605,606,609,610,610,616,616,616,616,616,617,619,621,622,623,623,622,622,620,613,613,621,623,623,616,615,615,615,623,623,616,613,612,612,613,623,624,624,624,623,623,624,625,625,624,624,625,625,625,624,623,623,623,624,624,624,624,624,624,624,624,624,624,624,624,622,620,620,622,623,623,623,623,623,623,622,622,623,623,623,623,622,622,623,623,623,622,622,621,621,621,623,623,623,621,621,622,622,621,621,622,622,622,621,621,624,624,624,624,625,625,625,625,625,625,624,624,624,624,624,624,624,624,624,624,624,623,620,620,618,615,614,614,617,617,617,617,613,613,622,622,620,619,619,622,622,621,619,619,620,620,620,620,620,620,620,620,620,614,614,618,618,619,618,619,621,621,621,619,619,622,623,624,625,625,625,624,624,624,624,624,624,624,624,624,624,624,624,624,624,624,623,620,618,618,621,622,625,625,624,623,623,623,623,623,623,623,623,623,622,622,622,622,622,622,623,623,623,623,623,623,623,623,622,622,622,622,622,622,622,622,622,622,622,622,622,621,621,622,623,623,623,623,623,623,623,623,623,623,622,623,623,623,623,624,624,624,624,624,624,624,624,624,625,625,624,623,623,623,625,625,624,624,624,624,624,624,624,624,624,623,622,622,623,623,618,618,621,621,622,622,622,621,614,614,611,614,611,614,614,614,612,612,614,614,613,613,613,614,616,616,610,610,610,610,610,611,613,613,614,610,610,610,609,613,609,610,610,612,612,612,615,615,615,614,613,613,614,614,613,613,612,615,615,615,615,617,617,616,616,616,612,612,612,617,617,617,617,617,615,615,613,613,613,616,617,617,617,616,616,616,616,616,615,615,615,615,615,615,615,615,616,618,616,613,613,612,611,611,613,618,619,619,619,618,616,616,616,617,611,610,610,616,616,616,616,611,611,614,614,614,598,598,597,598,598,606,609,611,612,614,614,615,616,616,617,617,615,615,616,616,615,611,610,586,586,598,599,599,602,607,608,615,615,585,579,577,574,574,590,592,600,617,617,602,601,601,605,605,586,583,574,573,571,571,577,578,581,581,582,585,612,612,606,604,603,601,601,604,604,604,601,597,596,595,594,594,595,595,587,573,567,565,562,561,560,560,560,561,563,563,561,560,559,559,562,564,573,573,571,570,570,570,573,574,579,580,580,579,579,579,580,581,581,571,563,560,559,558,550,543,543,549,550,554,554,571,571,569,567,567,567,567,568,571,574,601,604,605,605,605,606,605,581,571,571,569,563,563,563,564,565,567,568,574,592,592,590,563,563,563,549,534,532,530,527,525,523,522,522,523,528,529,542,542,542,596,596,591,586,568,567,565,564,534,533,525,524,515,513,511,508,507,504,503,502,502,502,502,502,502,504,504,516,518,518,518,539,539,539,539,539,539,541,544,546,546,536,533,530,527,525,523,523,521,521,521,521,521,520,516,508,504,500,497,496,496,495,494,490,487,486,484,483,483,484,485,486,487,487'.split(',').map(Number)
+const NRIP = 22
+
+const FRAG = `
+precision highp float;
+#define NRIP ${NRIP}
+#define NR ${RIDGE.length}.0
+uniform sampler2D uDay, uDusk, uRidge, uWater;
+uniform vec2 uRes, uTexSize, uPos, uSun, uFront;
+uniform vec2 uRipPos[NRIP];
+uniform float uRipAge[NRIP];
+uniform float uTime, uT, uSunA, uSunLow, uSunVis, uHasDay, uShore, uHorizon, uCamH, uAmp, uGlint;
+uniform float uSwell, uSwellSpeed, uRipFreq, uRipDecay, uRipSize, uRipAmp, uReach, uBand;
+
+float hash(vec2 p){ p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  float a = hash(i), b = hash(i+vec2(1,0)), c = hash(i+vec2(0,1)), d = hash(i+vec2(1,1));
+  vec2 w = f*f*(3.0-2.0*f);
+  return mix(mix(a,b,w.x), mix(c,d,w.x), w.y);
+}
+float lum(vec3 c){ return dot(c, vec3(0.299, 0.587, 0.114)); }
+
+/* cover-fit: fill the canvas, crop the overflow, never stretch. The crop is
+   taken from uPos, which is the object-position of the <img> underneath, so
+   the canvas lands on exactly the frame the page was already showing */
+vec2 coverUV(vec2 uv){
+  float ra = uRes.x / uRes.y, ri = uTexSize.x / uTexSize.y;
+  vec2 s = (ra > ri) ? vec2(1.0, ri / ra) : vec2(ra / ri, 1.0);
+  return uv * s + uPos * (1.0 - s);
+}
+/* distance in the photograph's own space, so circles stay circular */
+float radial(vec2 p, vec2 c){ return length((p - c) * vec2(uTexSize.x / uTexSize.y, 1.0)); }
+
+/* the skyline, sixteen bits split over two channels and read unfiltered,
+   because filtering the high byte carries into the low one and steps the ridge */
+float ridgeAt(float i){
+  vec2 t = texture2D(uRidge, vec2((clamp(i, 0.0, NR - 1.0) + 0.5) / NR, 0.5)).ra;
+  return dot(t, vec2(65280.0, 255.0)) / 65535.0;
+}
+/* 1 in open sky, 0 on the mountain, soft across a pixel or two of the master */
+float skyAt(vec2 p){
+  float f = clamp(p.x, 0.0, 1.0) * (NR - 1.0), i = floor(f);
+  float r = mix(ridgeAt(i), ridgeAt(i + 1.0), f - i);
+  return smoothstep(r - 0.0012, r + 0.0012, p.y);
+}
+
+/* the water read as a receding plane, so ripples are true circles lying flat */
+vec2 plane(vec2 iuv){
+  float b = max(uHorizon - iuv.y, 0.0015);
+  float wz = uCamH / b;
+  return vec2((iuv.x - 0.5) * wz * 2.4, wz);
+}
+float height(vec2 iuv){
+  vec2 w = plane(iuv);
+  float fade = 1.0 / (1.0 + w.y * w.y * 0.85);
+  float t = uTime * uSwellSpeed;
+  float h = 0.0;
+  h += sin((w.y * 1.1 + w.x * 0.2) * uSwell - t * 1.0) * 0.5 * mix(0.6, 1.0, fade);
+  h += sin((w.y * 2.1 - w.x * 0.5) * uSwell - t * 1.6) * 0.28 * mix(0.5, 1.0, fade);
+  h += (noise(vec2(w.x, w.y) * uSwell * 1.6 + vec2(0.0, -t * 0.5)) - 0.5) * 0.55 * fade;
+  for (int i = 0; i < NRIP; i++){
+    float age = uRipAge[i];
+    float env = smoothstep(0.0, 0.32, age) * exp(-age * uRipDecay);
+    if (env < 0.002) continue;
+    float d = length(w - uRipPos[i]);
+    float clear = smoothstep(0.0, 2.5 / uRipFreq, d);
+    h += sin(d * uRipFreq - age * uRipDecay * 4.0) * env * exp(-d * uRipSize) * uRipAmp * fade * clear;
+  }
+  return h;
+}
+
+/* the travelling sun, in two parts. The disc and its tight bloom are solid,
+   so the mountain hides them. The wide halo is the air around the sun, so it
+   carries on over the ridge for a moment after the disc has gone, the way a
+   real sunset keeps glowing. The white core and the warm halo are kept apart,
+   so a low sun washes the sky amber while its centre stays a hot point. */
+vec3 sunCore(float d){
+  float r = mix(0.011, 0.024, uSunLow);
+  float disc = smoothstep(r, r * 0.60, d);
+  vec3 core = mix(vec3(1.0, 0.99, 0.96), vec3(1.0, 0.76, 0.46), uSunLow);
+  return core * (disc * 2.1 + exp(-d * 170.0) * 0.85);
+}
+vec3 sunHalo(float d){
+  vec3 warm = mix(vec3(1.0, 0.91, 0.74), vec3(1.0, 0.62, 0.30), uSunLow);
+  return warm * (exp(-d * 42.0) * 0.50 + exp(-d * 10.0) * (0.15 + 0.24 * uSunLow) + exp(-d * 3.0) * 0.09 * uSunLow);
+}
+/* both, seen at p: the disc only where p is sky, the halo a quarter as strong
+   on the mountain face, and the halo dims as the disc goes down */
+vec3 sunAt(vec2 p){
+  float d = radial(p, uSun), sky = skyAt(p);
+  return sunCore(d) * sky + sunHalo(d) * mix(0.25, 1.0, sky) * mix(0.35, 1.0, uSunVis);
+}
+
+/* a filmic knee. The photograph is untouched below K; above it the curve
+   rolls off to white with its slope preserved at the join, so the sun keeps
+   a soft edge instead of clipping into a flat white coin. */
+vec3 shoulder(vec3 c){
+  const float K = 0.74;
+  vec3 s = vec3(K) + (1.0 - K) * (1.0 - exp(-(c - vec3(K)) / (1.0 - K)));
+  return mix(c, s, step(vec3(K), c));
+}
+
+void main(){
+  vec2 uv = gl_FragCoord.xy / uRes;
+  vec2 iuv = coverUV(uv);
+  float q = clamp(1.0 - uT, 0.0, 1.0);
+
+  /* the water is the open pools and nothing else: the mask traced from both
+     frames, and never above the mirror line. Grass and timber stay still. */
+  float depth = max(uShore - iuv.y, 0.0);
+  float water = texture2D(uWater, iuv).r * (1.0 - smoothstep(uShore - 0.006, uShore + 0.001, iuv.y));
+
+  /* the swell, sampled three times for the slope rather than four */
+  vec2 off = vec2(0.0);
+  float crest = 0.0;
+  if (water > 0.004){
+    float e = 0.0016;
+    float h0 = height(iuv);
+    vec2 slope = clamp(vec2(height(iuv + vec2(e, 0.0)) - h0, height(iuv + vec2(0.0, e)) - h0) / e, -9.0, 9.0);
+    off = slope * uAmp * water * (0.10 + depth * 2.2) * smoothstep(0.0, 0.05, depth);
+    off = clamp(off, -0.02, 0.02);
+    crest = clamp(slope.y * 0.14, -1.0, 1.0) * water;
+  }
+  vec2 suv = clamp(iuv + off, 0.0005, 0.9995);
+  vec3 dusk = texture2D(uDusk, suv).rgb;
+  vec3 day = texture2D(uDay, suv).rgb;
+
+  /* ---- the light ----
+     The frames register, so this could be a plain cross-fade, and it nearly
+     is. What it adds is order: every pixel turns inside its own window,
+     delayed by its distance from where the sun sets. Going down, the far side
+     of the frame dims first and the glow over the ridge is the last thing to
+     go; coming up, the morning spreads out from the ridge the sun rose from.
+     The water turns a little after the sky it is copying. */
+  float delay = clamp(radial(iuv, uFront) / uReach, 0.0, 1.0);
+  delay = clamp(mix(delay, 1.0, 0.30 * water) - 0.15 * (lum(day) - 0.45), 0.0, 1.0);
+  float o = delay * (1.0 - uBand);
+  float w = smoothstep(o, o + uBand, q) * uHasDay;
+  vec3 base = mix(dusk, day, w);
+  base *= 1.0 - max(-crest, 0.0) * 0.10;
+
+  /* everything the shader adds is kept apart from the photograph, so that at
+     either end of the turn what is on screen is the frame as it was shot */
+  vec3 add = vec3(0.0);
+
+  /* a little light rides the turn itself, strongest near the sun */
+  float turning = w * (1.0 - w) * 4.0;
+  float near = exp(-radial(iuv, uSun) * 1.7);
+  add += mix(vec3(1.0, 0.84, 0.62), vec3(1.0, 0.97, 0.93), q) * turning * (0.03 + 0.10 * near) * uHasDay;
+
+  /* the sun in the sky */
+  add += sunAt(iuv) * uSunA * (1.0 - water);
+
+  if (water > 0.004){
+    /* and in the pools: mirrored about the waterline, read through the swell,
+       a little weaker close in where the water shows more of its own colour */
+    vec2 m = vec2(suv.x, 2.0 * uShore - suv.y);
+    add += sunAt(m) * uSunA * water * mix(0.8, 0.5, smoothstep(0.0, 0.4, depth));
+    /* the crests under it break the reflection into a short column of glitter */
+    float cx = (iuv.x + off.x * 0.6 - uSun.x) * (uTexSize.x / uTexSize.y);
+    float cw = 0.012 + depth * 0.25;
+    float road = exp(-(cx * cx) / (cw * cw)) * exp(-abs(iuv.y - (2.0 * uShore - uSun.y)) * 5.0);
+    add += mix(vec3(1.0, 0.82, 0.55), vec3(1.0, 0.95, 0.86), 1.0 - uSunLow)
+         * road * water * uSunA * uSunVis * 1.4 * max(crest, 0.0);
+  }
+
+  /* a thin specular lift on the ripple crests, so the water reads as water */
+  add += mix(vec3(0.95, 0.97, 1.0), vec3(1.0, 0.92, 0.78), uT) * max(crest, 0.0) * uGlint;
+
+  /* the knee is brought in only in proportion to the light that was added,
+     so the sun rolls off to white while the photograph's own highlights are
+     left exactly where the camera put them */
+  vec3 col = base + add;
+  float lit = max(max(add.r, add.g), add.b);
+  col = mix(col, shoulder(col), smoothstep(0.0, 0.22, lit));
+
+  /* one bit of dither. Eight-bit output bands visibly across a glow this
+     wide, and the rings are the first thing the eye finds. */
+  col += (hash(gl_FragCoord.xy) - 0.5) / 255.0;
+  gl_FragColor = vec4(col, 1.0);
+}`
+
+/* the skyline in uv, for the script's own use */
+const ridgeAt = x => {
+  const f = Math.max(0, Math.min(1, x)) * (RIDGE.length - 1), i = Math.min(RIDGE.length - 2, Math.floor(f))
+  return 1 - (RIDGE[i] + (RIDGE[i + 1] - RIDGE[i]) * (f - i)) / RIDGE_H
+}
+/* a monotone cubic through [x, y] keys: smooth in speed, and it never
+   overshoots, so the sun cannot bob back up on its way down */
+function monotone(keys){
+  const n = keys.length, X = keys.map(k => k[0]), Y = keys.map(k => k[1]), h = [], m = [], t = []
+  for (let i = 0; i < n - 1; i++){ h[i] = X[i + 1] - X[i]; m[i] = (Y[i + 1] - Y[i]) / h[i] }
+  t[0] = m[0]; t[n - 1] = m[n - 2]
+  for (let i = 1; i < n - 1; i++)
+    t[i] = m[i - 1] * m[i] <= 0 ? 0 : 3 * (h[i - 1] + h[i]) / ((2 * h[i] + h[i - 1]) / m[i - 1] + (h[i] + 2 * h[i - 1]) / m[i])
+  return x => {
+    let i = 0; while (i < n - 2 && x > X[i + 1]) i++
+    const u = Math.max(0, Math.min(1, (x - X[i]) / h[i])), u2 = u * u, u3 = u2 * u
+    return (2 * u3 - 3 * u2 + 1) * Y[i] + (u3 - 2 * u2 + u) * h[i] * t[i] + (3 * u2 - 2 * u3) * Y[i + 1] + (u3 - u2) * h[i] * t[i + 1]
+  }
+}
+
+function buildHero(canvas, duskImg, dayImg){
+  const gl = canvas.getContext('webgl', { antialias:false, alpha:false, depth:false, stencil:false, powerPreference:'high-performance' })
+  if (!gl) return null
+  const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s)
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s }
+  const prog = gl.createProgram()
+  gl.attachShader(prog, sh(gl.VERTEX_SHADER, 'attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }'))
+  gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG))
+  gl.linkProgram(prog)
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog))
+  gl.useProgram(prog)
+  const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf)
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW)
+  const loc = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0)
+  const U = {}
+  for (const n of ['uDay','uDusk','uRidge','uWater','uRes','uTexSize','uPos','uSun','uFront','uRipPos','uRipAge','uTime','uT','uSunA','uSunLow','uSunVis',
+                   'uHasDay','uShore','uHorizon','uCamH','uAmp','uGlint','uSwell','uSwellSpeed','uRipFreq','uRipDecay','uRipSize','uRipAmp',
+                   'uReach','uBand']) U[n] = gl.getUniformLocation(prog, n)
+  gl.uniform1i(U.uDay, 0); gl.uniform1i(U.uDusk, 1); gl.uniform1i(U.uRidge, 2); gl.uniform1i(U.uWater, 3); gl.uniform1f(U.uHasDay, 0)
+  gl.uniform2f(U.uPos, HERO.pos[0], HERO.pos[1])
+  gl.uniform1f(U.uShore, HERO.shore); gl.uniform1f(U.uHorizon, HERO.horizon); gl.uniform1f(U.uCamH, HERO.camH)
+  gl.uniform1f(U.uAmp, HERO.amp); gl.uniform1f(U.uGlint, HERO.glint); gl.uniform1f(U.uSwell, HERO.swell); gl.uniform1f(U.uSwellSpeed, HERO.swellSpeed)
+  gl.uniform1f(U.uRipFreq, HERO.ripFreq); gl.uniform1f(U.uRipDecay, HERO.ripDecay); gl.uniform1f(U.uRipSize, HERO.ripSize); gl.uniform1f(U.uRipAmp, HERO.ripAmp)
+  gl.uniform1f(U.uReach, HERO.reach); gl.uniform1f(U.uBand, HERO.band)
+
+  /* the light: s runs 0 (day) to 1 (dusk) */
+  let s = THEME === 'day' ? 0 : 1, from = s, to = s, t0 = 0, moving = false, dirty = true
+
+  /* the photographs as textures. Non-power-of-two, so clamp and no mipmaps. */
+  const MAX = gl.getParameter(gl.MAX_TEXTURE_SIZE)
+  let texW = 1, texH = 1, readyDusk = false, readyDay = false
+  function makeTex(unit, filter){
+    const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, t)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter)
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 1, 1, 0, gl.RGB, gl.UNSIGNED_BYTE, new Uint8Array([40, 48, 44]))
+    return t
+  }
+  const texDay = makeTex(0, gl.LINEAR), texDusk = makeTex(1, gl.LINEAR)
+  /* the skyline as a one-row texture, each column's height in sixteen bits */
+  makeTex(2, gl.NEAREST)
+  { const px = new Uint8Array(RIDGE.length * 2)
+    RIDGE.forEach((r, i) => { const v = Math.round((1 - r / RIDGE_H) * 65535); px[i * 2] = v >> 8; px[i * 2 + 1] = v & 255 })
+    gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1)
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE_ALPHA, RIDGE.length, 1, 0, gl.LUMINANCE_ALPHA, gl.UNSIGNED_BYTE, px)
+    gl.pixelStorei(gl.UNPACK_ALIGNMENT, 4) }
+  /* the water mask. It starts as no water at all, so until it arrives, or if
+     it never does, the photograph simply stands still. A copy is kept on the
+     script's side so the pointer only drops ripples where there is water. */
+  const texWater = makeTex(3, gl.LINEAR)
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 1, 1, 0, gl.RGB, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0]))
+  let waterPx = null, waterW = 0, waterH = 0
+  { const m = new Image()
+    m.onload = () => {
+      gl.activeTexture(gl.TEXTURE3); gl.bindTexture(gl.TEXTURE_2D, texWater)
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true)
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, m)
+      dirty = true
+      try {
+        const c = document.createElement('canvas'); c.width = m.naturalWidth; c.height = m.naturalHeight
+        const x = c.getContext('2d'); x.drawImage(m, 0, 0)
+        waterPx = x.getImageData(0, 0, c.width, c.height).data; waterW = c.width; waterH = c.height
+      } catch (e){ waterPx = null }
+    }
+    m.src = 'assets/hero-wetland-water.png' }
+  /* water at a point in the photograph's uv (0,0 bottom left), 0 to 1 */
+  const waterAt = (ix, iy) => {
+    if (!waterPx || ix < 0 || ix > 1 || iy < 0 || iy > 1) return 0
+    const px = Math.min(waterW - 1, Math.floor(ix * waterW)), py = Math.min(waterH - 1, Math.floor((1 - iy) * waterH))
+    return waterPx[(py * waterW + px) * 4] / 255
+  }
+  /* redraw the photograph small enough that any GPU will take it */
+  function downscale(img){
+    const c = document.createElement('canvas')
+    const k = Math.min(1, MAX / Math.max(1, img.naturalWidth * (devicePixelRatio || 1)))
+    c.width = Math.max(1, Math.round(img.naturalWidth * k))
+    c.height = Math.max(1, Math.round(img.naturalHeight * k))
+    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height)
+    return c
+  }
+  function upload(img, unit, tex){
+    /* A natural size of zero is not a size. A srcset image divides its natural
+       size by a density that depends on the viewport, so while the window has
+       no width yet (a background pane, a frame still being laid out) it reports
+       0 even after it has loaded. Uploading then would hand the shader a zero
+       width, coverUV would divide by it, and every column of the hero would
+       sample a single texel: vertical streaks, permanently. So it waits, and
+       tryDusk and tryDay below retry on every load and every resize. */
+    if (!img.naturalWidth || !img.naturalHeight) return false
+    gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, tex)
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true)
+    /* an <img> served through srcset reports naturalWidth already corrected for
+       density, so it can understate what the decoder actually handed over and
+       the size guard alone cannot be trusted. Offer the image, then check
+       whether the driver took it, and redraw it smaller if it did not. */
+    let src = img.naturalWidth > MAX ? downscale(img) : img
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, src)
+    if (src === img && gl.getError() !== gl.NO_ERROR){
+      src = downscale(img)
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, src)
+    }
+    /* The shader reads uTexSize for its ratio alone, and a ratio survives the
+       density correction intact. It has to come from the photograph and not
+       from .width, which on a rendered <img> returns the size it is displayed
+       at: uTexSize was being handed the size of the canvas, coverUV cancelled
+       itself out, and the frame was stretched to fit rather than cropped.
+       Invisible in a 16:9 window, badly wrong on a phone. */
+    texW = img.naturalWidth; texH = img.naturalHeight
+    gl.uniform2f(U.uTexSize, texW, texH); dirty = true; G = null
+    return true
+  }
+  function tryDusk(){ if (!readyDusk && upload(duskImg, 1, texDusk)) readyDusk = true }
+  function tryDay(){ if (!readyDay && upload(dayImg, 0, texDay)){ readyDay = true; gl.uniform1f(U.uHasDay, 1) } }
+  /* not once: the browser fires load again whenever a resize makes it pick a
+     different srcset candidate, and the texture should follow it */
+  duskImg.addEventListener('load', () => { readyDusk = false; tryDusk() })
+  dayImg.addEventListener('load', () => { readyDay = false; tryDay() })
+
+  /* ripples the pointer leaves, on the water only */
+  const ripPos = new Float32Array(NRIP * 2), ripBirth = new Float32Array(NRIP).fill(-1e3), ripAge = new Float32Array(NRIP).fill(1e3)
+  let ripIdx = 0, lastX = 0, lastY = 0
+  function drop(nx, ny){
+    const r = canvas.getBoundingClientRect()
+    const ra = r.width / r.height, ri = texW / texH
+    const c = (ra > ri) ? [1, ri/ra] : [ra/ri, 1]
+    const ix = nx * c[0] + HERO.pos[0] * (1 - c[0]), iy = (1 - ny) * c[1] + HERO.pos[1] * (1 - c[1])
+    const b = HERO.horizon - iy
+    if (b <= 0.004 || iy > HERO.shore || waterAt(ix, iy) < 0.35) return
+    const wz = HERO.camH / b
+    ripPos[ripIdx*2] = (ix - 0.5) * wz * 2.4; ripPos[ripIdx*2+1] = wz
+    ripBirth[ripIdx] = performance.now() / 1000
+    ripIdx = (ripIdx + 1) % NRIP
+  }
+  const host = canvas.closest('section')
+  host.addEventListener('pointermove', e => {
+    const r = canvas.getBoundingClientRect()
+    const nx = (e.clientX - r.left) / r.width, ny = (e.clientY - r.top) / r.height
+    if (Math.hypot(nx - lastX, ny - lastY) > 0.012){ drop(nx, ny); lastX = nx; lastY = ny }
+  }, { passive:true })
+
+  /* ---- where the sun goes ----
+     It sets where the evening glow is brightest, unless the crop has cut that
+     off, in which case it sets as far right as the window still shows, behind
+     whatever part of the ridge is there. Its day end is above the top edge of
+     the window, wherever the crop has put that edge. G holds this for the
+     current window and texture, and is rebuilt when either changes. */
+  const smooth = (a, b, x) => { const k = Math.max(0, Math.min(1, (x - a) / (b - a))); return k * k * (3 - 2 * k) }
+  let G = null
+  function geometry(){
+    const ra = canvas.width / canvas.height, ri = texW / texH
+    const cx = ra > ri ? 1 : ra / ri, cy = ra > ri ? ri / ra : 1
+    const right = cx + HERO.pos[0] * (1 - cx), top = cy + HERO.pos[1] * (1 - cy)
+    const x = Math.min(HERO.setX, right - HERO.edge), ry = ridgeAt(x)
+    /* height against s. The sun enters quickly while it is above the frame,
+       crosses the sky, and is slowest where it matters, touching the ridge
+       at s = .58 and gone behind it at .82. Everything is a function of s,
+       and s itself runs at a constant rate, so a second click mid-turn sends
+       the sun back from wherever it is, with no jump. */
+    G = { x, ry, path:monotone([[0, top + 0.17], [0.10, top + 0.035], [0.58, ry + 0.028], [0.82, ry - 0.03], [1, ry - 0.065]]) }
+    gl.uniform2f(U.uFront, x, ry)
+  }
+  /* it leans west as it climbs, so going down it drifts right into the glow */
+  function sunAt(s){
+    const y = G.path(s), x = G.x + (G.ry - y) * HERO.lean
+    return { x, y,
+             low:smooth(0.15, 0.7, s),
+             alpha:smooth(0, 0.08, s) * (1 - smooth(0.84, 1, s)),
+             vis:Math.max(0, Math.min(1, (y - ridgeAt(x)) / 0.048 + 0.5)) }
+  }
+  function setLight(target, animate){
+    to = target
+    dirty = true
+    if (!animate){ s = from = target; moving = false; return }
+    from = s; t0 = performance.now(); moving = from !== to
+  }
+
+  function resize(){
+    const r = canvas.getBoundingClientRect()
+    const dpr = Math.min(devicePixelRatio || 1, 1.5)
+    canvas.width = Math.max(1, Math.round(r.width * dpr)); canvas.height = Math.max(1, Math.round(r.height * dpr))
+    gl.viewport(0, 0, canvas.width, canvas.height)
+    gl.uniform2f(U.uRes, canvas.width, canvas.height); dirty = true; G = null
+    /* the window may only now have a width, which is the moment a photograph
+       that loaded into a zero-width viewport finally has a natural size */
+    tryDusk(); tryDay()
+  }
+  function frame(nowMs){
+    /* draw only once the photograph the page is showing has arrived;
+       the plain <img> underneath carries the moment before that. Until then
+       every frame asks again, because the browser settles a srcset image's
+       natural size after layout, later than any resize or load callback can
+       see it. Once both are in, these are two boolean checks and nothing else. */
+    tryDusk(); tryDay()
+    if (!readyDusk || (s < 1 && !readyDay)) return false
+    canvas.classList.add('-on')
+    if (moving){
+      /* constant rate: the whole turn takes HERO.travel, half a turn half that */
+      const k = Math.min(1, (nowMs - t0) / (Math.abs(to - from) * HERO.travel))
+      s = from + (to - from) * k
+      if (k >= 1){ s = to; moving = false }
+    }
+    if (!G) geometry()
+    const now = nowMs / 1000
+    for (let i = 0; i < NRIP; i++) ripAge[i] = now - ripBirth[i]
+    const sun = sunAt(s)
+    /* the photographs turn a little behind the sun: mostly evening by the
+       time it touches the ridge, wholly evening once it has gone */
+    gl.uniform1f(U.uTime, now); gl.uniform1f(U.uT, smooth(0.12, 0.80, s))
+    gl.uniform2f(U.uSun, sun.x, sun.y); gl.uniform1f(U.uSunA, sun.alpha); gl.uniform1f(U.uSunLow, sun.low); gl.uniform1f(U.uSunVis, sun.vis)
+    gl.uniform2fv(U.uRipPos, ripPos); gl.uniform1fv(U.uRipAge, ripAge)
+    gl.drawArrays(gl.TRIANGLES, 0, 3)
+    dirty = false; return true
+  }
+  tryDusk(); tryDay()
+  return { resize, frame, setLight, get moving(){ return moving }, get dirty(){ return dirty } }
+}
+
+/* ============================================================
+   THE INDEX OF CAUSES
+============================================================ */
+const list = $('#causeList'), plate = $('#plate')
+list.innerHTML = CAUSES.map((c, i) => { const n = (DIRECTORY[c.id] || []).length
+  return `<li><button class="row" type="button" data-i="${i}" aria-pressed="${i === 0}">
+    <span class="n">${String(i+1).padStart(2,'0')}</span><span class="name">${c.name}</span>
+    <span class="go">${n ? `${n} partner${n > 1 ? 's' : ''} &rarr;` : 'Open &rarr;'}</span></button></li>` }).join('')
+$('#footCauses').innerHTML = CAUSES.map(c => `<li><a href="#charities" data-cause="${c.id}">${c.short}</a></li>`).join('')
+
+let shown = -1
+function showCause(i, fromUser){
+  if (i === shown) return
+  shown = i
+  const c = CAUSES[i]
+  const list = DIRECTORY[c.id] || []
+  const body = list.length
+    ? `<ul class="entries" role="list">${list.map(e => `<li>
+        <span class="crest" aria-hidden="true">${e.crest}</span>
+        <span class="entry">
+          <a class="cname" href="${e.url}" target="_blank" rel="noopener noreferrer">${e.name}${EXT}<span class="vh"> (opens in a new tab)</span></a>
+          <span class="cdesc">${e.desc}</span>
+        </span></li>`).join('')}</ul>`
+    : `<div class="entries-empty">
+        <p><strong>Named, and not yet filled.</strong></p>
+        <p>No charity has come through our diligence in this area yet. The cause keeps its place in the index until one does, because a gap you can see is worth more to you than a gap we left out.</p>
+        <p class="pending">Open for referrals</p>
+      </div>`
+  plate.innerHTML = `<div class="plate-in">
+    <div class="phead">
+      <div>
+        <p class="p-n">${list.length ? `${list.length} partner${list.length > 1 ? 's' : ''}` : 'Not yet filled'}</p>
+        <h3>${c.name}</h3>
+      </div>
+      ${glyph(c.icon, 'glyph')}
+    </div>
+    <p class="why">${c.why}</p>
+    ${body}
+    <a class="give" href="#donate">Give to this cause <span aria-hidden="true">&rarr;</span></a>
+  </div>`
+  $$('#causeList .row').forEach((b, k) => b.setAttribute('aria-pressed', String(k === i)))
+  if (fromUser && innerWidth <= 1020){
+    const top = plate.getBoundingClientRect().top + scrollY - 90
+    scrollTo({ top, behavior: REDUCED ? 'auto' : 'smooth' })
+  }
+}
+list.addEventListener('click', e => { const b = e.target.closest('.row'); if (b) showCause(+b.dataset.i, true) })
+list.addEventListener('keydown', e => {
+  const b = e.target.closest('.row'); if (!b) return
+  const i = +b.dataset.i
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight'){ e.preventDefault(); const n = list.querySelector(`[data-i="${Math.min(CAUSES.length-1, i+1)}"]`); n.focus(); showCause(+n.dataset.i) }
+  if (e.key === 'ArrowUp' || e.key === 'ArrowLeft'){ e.preventDefault(); const n = list.querySelector(`[data-i="${Math.max(0, i-1)}"]`); n.focus(); showCause(+n.dataset.i) }
+})
+$('#footCauses').addEventListener('click', e => {
+  const a = e.target.closest('a'); if (!a) return
+  const i = CAUSES.findIndex(c => c.id === a.dataset.cause); if (i >= 0) showCause(i)
+})
+showCause(0)
+
+/* three entries, hung at three heights under three hairlines. There is no
+   honest photograph of another organisation's work to put here, and a drawn
+   frame is not one, so the charity's own name carries the entry. */
+/* by id, not by position: merging two causes once moved Animals from the
+   eighth slot to the seventh, and an index would have quietly pointed at
+   nothing and taken the rest of the script down with it */
+const FEATURED = [
+  { id:'homelessness', e:0, lift:'0px' },
+  { id:'psychedelic',  e:0, lift:'clamp(40px,7vw,104px)' },
+  { id:'animals',      e:0, lift:'clamp(16px,2.6vw,40px)' },
+]
+$('#partnersGrid').innerHTML = FEATURED.map(({ id, e, lift }, n) => { const i = CAUSES.findIndex(c => c.id === id), p = DIRECTORY[id][e]
+  return `<article class="pentry rise -d${n+1}" style="--lift:${lift}">
+    ${glyph(CAUSES[i].icon, 'pmark')}
+    <div class="pbody">
+      <span class="ctag">${CAUSES[i].short}</span>
+      <h3><a class="cname" href="${p.url}" target="_blank" rel="noopener noreferrer">${p.name}${EXT}<span class="vh"> (opens in a new tab)</span></a></h3>
+      <p>${p.desc}</p>
+    </div>
+  </article>` }).join('')
+
+/* ============================================================
+   THE HERO, MOUNTED
+============================================================ */
+const heroCanvas = $('#heroCanvas'), heroSection = $('#home')
+let hero = null, heroActive = true
+try { hero = buildHero(heroCanvas, $('#heroDusk'), $('#heroDay')) } catch (err){ console.warn('Hero shader unavailable:', err); hero = null }
+if (!hero){ heroCanvas.remove(); heroSection.classList.add('-nogl') }
+else {
+  new ResizeObserver(() => hero.resize()).observe(heroCanvas)
+  new IntersectionObserver(es => { for (const e of es) heroActive = e.isIntersecting }, { rootMargin:'80px' }).observe(heroCanvas)
+  hero.resize()
+  requestAnimationFrame(function loop(t){
+    requestAnimationFrame(loop)
+    /* with reduced motion the water stands still: draw only when something changed */
+    if (REDUCED && !hero.dirty && !hero.moving) return
+    if (heroActive || hero.moving || hero.dirty) hero.frame(t)
+  })
+}
+
+/* ============================================================
+   THE PAGES BREATHE
+
+   Four silhouettes, drawn once into offscreen canvases at three
+   blur radii and tinted there, so every frame afterwards is only
+   drawImage. Depth of field is genuine: focus sits at the middle
+   distance and both the near and the far dissolve out of it.
+
+   Scroll carries each depth at its own rate. The pointer stirs
+   what it passes and the air eases back behind it, the same
+   gesture the hero water answers with ripples.
+============================================================ */
+const nature = (() => {
+  const cv = $('#nature')
+  const ctx = cv && cv.getContext && cv.getContext('2d')
+  if (!ctx) return null
+
+  const N = matchMedia('(max-width:760px)').matches ? 26 : 48
+  const BLURS = [1.0, 4.5, 11]
+  let W = 0, H = 0, span = 0, sprites = [], bits = [], strength = 1
+  let px = -1e4, py = -1e4, stirring = false
+
+  /* the shapes: a blade of marsh grass, a seed head, a leaf, and a
+     seed carried on the air. Drawn in outline units of 100. */
+  function silhouette(g, kind, S){
+    const u = S / 100
+    g.beginPath()
+    if (kind === 0){
+      g.moveTo(-3 * u, 47 * u)
+      g.bezierCurveTo(-15 * u, 12 * u, -7 * u, -25 * u, 11 * u, -47 * u)
+      g.bezierCurveTo(3 * u, -21 * u, 9 * u, 13 * u, 5 * u, 47 * u)
+    } else if (kind === 1){
+      g.moveTo(1 * u, -46 * u)
+      g.bezierCurveTo(13 * u, -25 * u, 14 * u, 15 * u, 4 * u, 46 * u)
+      g.bezierCurveTo(-9 * u, 15 * u, -11 * u, -25 * u, 1 * u, -46 * u)
+    } else if (kind === 2){
+      g.moveTo(0, -45 * u)
+      g.bezierCurveTo(27 * u, -19 * u, 25 * u, 23 * u, 2 * u, 45 * u)
+      g.bezierCurveTo(-24 * u, 23 * u, -26 * u, -19 * u, 0, -45 * u)
+    } else {
+      g.arc(0, 0, 15 * u, 0, Math.PI * 2)
+    }
+    g.closePath(); g.fill()
+  }
+
+  function build(){
+    const cs = getComputedStyle(document.documentElement)
+    const tint = [cs.getPropertyValue('--leaf').trim() || '#888', cs.getPropertyValue('--leaf-2').trim() || '#888']
+    strength = parseFloat(cs.getPropertyValue('--leaf-a')) || 1
+    sprites = []
+    /* four shapes by three blur radii by two tints, built once */
+    for (let i = 0; i < 8; i++){
+      const k = i % 4, t = i < 4 ? 0 : 1
+      const row = []
+      for (let b = 0; b < BLURS.length; b++){
+        const pad = BLURS[b] * 3.2, S = 100 + pad * 2
+        const c = document.createElement('canvas'); c.width = c.height = Math.ceil(S)
+        const g = c.getContext('2d')
+        g.translate(c.width / 2, c.height / 2)
+        g.filter = `blur(${BLURS[b]}px)`
+        g.fillStyle = '#fff'
+        silhouette(g, k, 100)
+        g.filter = 'none'
+        /* tint the silhouette in place, so no colour work happens per frame */
+        g.globalCompositeOperation = 'source-in'
+        g.fillStyle = tint[t]
+        g.fillRect(-c.width, -c.height, c.width * 2, c.height * 2)
+        row.push(c)
+      }
+      sprites.push(row)
+    }
+  }
+
+  function seed(){
+    bits = []
+    for (let i = 0; i < N; i++){
+      /* depth is weighted toward the middle distance, where the focus is */
+      const z = (Math.random() + Math.random() + Math.random()) / 3
+      const off = Math.abs(z - 0.46)
+      /* and most of it gathers down the margins, so the reading column stays
+         quiet without the mask having to do all the work */
+      const edge = Math.random() < 0.72
+      const x = edge ? (Math.random() < 0.5 ? 0.02 + Math.random() * 0.3 : 0.68 + Math.random() * 0.3)
+                     : 0.3 + Math.random() * 0.4
+      bits.push({
+        k: (Math.random() < 0.28 ? 3 : Math.floor(Math.random() * 3)) + (Math.random() < 0.34 ? 4 : 0),
+        z, blur: off < 0.15 ? 0 : off < 0.32 ? 1 : 2,
+        x, y: Math.random(),
+        rot: Math.random() * Math.PI * 2, spin: (Math.random() - 0.5) * 0.00022,
+        size: 0.06 + z * 0.24,
+        a: (0.55 - off * 0.68) * (0.44 + z * 0.5),
+        phase: Math.random() * Math.PI * 2, drift: 0.4 + Math.random() * 0.9,
+        ox: 0, oy: 0,
+      })
+    }
+  }
+
+  function resize(){
+    const dpr = Math.min(devicePixelRatio || 1, 2)
+    W = innerWidth; H = innerHeight; span = H * 1.7
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr)
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+  }
+
+  function frame(t){
+    ctx.clearRect(0, 0, W, H)
+    const short = Math.min(W, H)
+    for (const b of bits){
+      const par = 0.1 + b.z * 0.6
+      let y = (b.y * span - scrollY * par) % span
+      if (y < 0) y += span
+      const cx = b.x * W + Math.sin(t * 0.00011 * b.drift + b.phase) * short * 0.04 + b.ox
+      const cy = y - span * 0.2 + Math.cos(t * 0.00008 * b.drift + b.phase) * short * 0.015 + b.oy
+      const sz = short * b.size
+      if (cx < -sz || cx > W + sz || cy < -sz || cy > H + sz){ b.ox *= 0.94; b.oy *= 0.94; continue }
+
+      /* the air is stirred by what passes through it, and settles again */
+      if (stirring){
+        const dx = cx - px, dy = cy - py, d2 = dx * dx + dy * dy, r = short * 0.24
+        if (d2 < r * r && d2 > 1){
+          const d = Math.sqrt(d2), push = (1 - d / r) * (1 - d / r) * 26 * (0.4 + b.z)
+          b.ox += (dx / d) * push * 0.04; b.oy += (dy / d) * push * 0.04
+        }
+      }
+      b.ox *= 0.94; b.oy *= 0.94
+      b.rot += b.spin * (t - (b.last || t)); b.last = t
+
+      const sp = sprites[b.k][b.blur]
+      ctx.globalAlpha = b.a * strength
+      ctx.translate(cx, cy); ctx.rotate(b.rot)
+      ctx.drawImage(sp, -sz / 2, -sz / 2, sz, sz)
+      ctx.setTransform(cv.width / W, 0, 0, cv.height / H, 0, 0)
+    }
+    ctx.globalAlpha = 1
+  }
+
+  build(); seed(); resize()
+  /* paint once up front, so the layer is already correct the moment the gate
+     opens rather than blank for a frame, and so it exists at all if the loop
+     never runs (a background tab throttles rAF to nothing) */
+  frame(performance.now())
+  addEventListener('resize', () => { resize(); frame(performance.now()) }, { passive:true })
+  addEventListener('pointermove', e => { px = e.clientX; py = e.clientY; stirring = true }, { passive:true })
+  addEventListener('pointerleave', () => { stirring = false }, { passive:true })
+
+  /* the tint follows the light; the layer is dipped rather than swapped */
+  let dip = 0
+  function retint(){
+    clearTimeout(dip); cv.classList.remove('-on')
+    dip = setTimeout(() => { build(); cv.classList.add('-on') }, 520)
+  }
+
+  if (REDUCED){
+    cv.classList.add('-on'); frame(performance.now())
+  } else {
+    let on = false
+    requestAnimationFrame(function loop(t){
+      requestAnimationFrame(loop)
+      if (document.hidden) return
+      /* nothing below the photograph is on screen yet, so nothing to draw */
+      if (scrollY < innerHeight * 0.45){ if (on){ cv.classList.remove('-on'); on = false } return }
+      if (!on){ cv.classList.add('-on'); on = true }
+      frame(t)
+    })
+  }
+  return { retint }
+})()
+
+/* ============================================================
+   DAY / DUSK
+============================================================ */
+const themeBtn = $('#themeBtn'), themeLabel = $('#themeLabel'), lightLabel = $('#lightLabel')
+function applyTheme(next, animate){
+  THEME = next
+  document.documentElement.setAttribute('data-theme', next)
+  document.querySelector('meta[name="theme-color"]').setAttribute('content', next === 'day' ? '#F4EDE1' : '#17131C')
+  themeBtn.setAttribute('aria-checked', String(next === 'dusk'))
+  themeLabel.textContent = next === 'dusk' ? 'Evening light is on. Switch to day.' : 'Daylight is on. Switch to dusk.'
+  lightLabel.textContent = next === 'dusk' ? 'Dusk' : 'Day'
+  try { localStorage.setItem(KEY, next) } catch (e) {}
+  /* the page's own colours travel on the registered custom properties in the
+     stylesheet, one transition on :root, so there is nothing to do here */
+  if (hero) hero.setLight(next === 'day' ? 0 : 1, animate && !REDUCED)
+  if (nature && animate) nature.retint()
+}
+const flip = () => applyTheme(THEME === 'dusk' ? 'day' : 'dusk', true)
+themeBtn.addEventListener('click', flip)
+applyTheme(THEME, false)
+{ const still = new URLSearchParams(location.search).get('sun')   /* ?sun=0.5 freezes the sun mid-arc, for review */
+  if (hero && still !== null && !isNaN(+still)) hero.setLight(Math.max(0, Math.min(1, +still)), false) }
+
+/* --- the hero copy, held back until the visitor moves ---
+   Scroll position alone is not enough: a wheel gesture at the very top of the
+   page moves nothing, so intent is read from the gesture as well as from the
+   result. Whichever arrives first wins, and it only ever fires once. --- */
+{
+  let said = false
+  const say = () => {
+    if (said) return
+    said = true
+    heroSection.classList.add('-said')
+    removeEventListener('scroll', onMove)
+    removeEventListener('wheel', onMove)
+    removeEventListener('touchmove', onMove)
+    removeEventListener('keydown', onKey)
+  }
+  const onMove = () => say()          /* any of the three gestures counts */
+  const onKey = e => { if (['ArrowDown','PageDown','End',' ','Spacebar'].includes(e.key)) say() }
+  if (REDUCED){
+    say()
+  } else {
+    addEventListener('scroll', onMove, { passive:true })
+    addEventListener('wheel', onMove, { passive:true })
+    addEventListener('touchmove', onMove, { passive:true })
+    addEventListener('keydown', onKey)
+    /* tabbing into invisible links is worse than showing them early */
+    heroSection.addEventListener('focusin', say, { once:true })
+    /* and if the page is restored mid-scroll, it is already too late to wait */
+    if (scrollY > 2) say()
+  }
+}
+
+/* --- reveal on scroll: everything arrives, nothing pops --- */
+if (REDUCED){
+  $$('.rise').forEach(el => el.classList.add('-in'))
+} else {
+  const reveal = new IntersectionObserver((es, o) => {
+    for (const e of es){ if (!e.isIntersecting) continue; e.target.classList.add('-in'); o.unobserve(e.target) }
+  }, { rootMargin:'0px 0px -8% 0px', threshold:0.05 })
+  $$('.rise').forEach(el => reveal.observe(el))
+  setTimeout(() => $$('.rise:not(.-in)').forEach(el => { if (el.getBoundingClientRect().top < innerHeight) el.classList.add('-in') }), 2500)
+}
+
+/* --- navigation --- */
+const nav = $('#nav'), navProgress = $('#navProgress')
+function onScroll(){
+  nav.classList.toggle('-stuck', scrollY > Math.max(120, innerHeight * 0.72))
+  const max = document.documentElement.scrollHeight - innerHeight
+  navProgress.style.setProperty('--p', max > 0 ? (scrollY / max).toFixed(4) : 0)
+}
+addEventListener('scroll', onScroll, { passive:true }); addEventListener('resize', onScroll, { passive:true }); onScroll()
+const toggle = $('#navtoggle')
+toggle.addEventListener('click', () => { const open = document.body.classList.toggle('-menu'); toggle.setAttribute('aria-expanded', String(open)) })
+const links = $$('#navlinks a')
+links.forEach(a => a.addEventListener('click', () => { document.body.classList.remove('-menu'); toggle.setAttribute('aria-expanded','false') }))
+const linkFor = {}; links.forEach(a => { linkFor[a.getAttribute('href').slice(1)] = a })
+const spy = new IntersectionObserver(es => {
+  for (const e of es){ if (!e.isIntersecting) continue; const a = linkFor[e.target.id]; if (!a) continue
+    links.forEach(x => x.removeAttribute('aria-current')); a.setAttribute('aria-current','true') }
+}, { rootMargin:'-45% 0px -50% 0px' })
+Object.keys(linkFor).forEach(id => { const el = document.getElementById(id); if (el) spy.observe(el) })
+
+/* --- contact form: errors are reported against the field that caused them,
+       and a field that has already complained re-checks itself as it is typed
+       in, so nobody is told off twice for the same thing --- */
+const form = $('#contactForm'), status = $('#formStatus')
+const RULES = [
+  ['name', v => v.trim() ? '' : 'We need a name to reply to.'],
+  ['email', v => !v.trim() ? 'We need an address to reply to.'
+    : /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? '' : 'That address does not look right.'],
+  ['message', v => v.trim() ? '' : 'Tell us what you would like to say.'],
+]
+function check(all){
+  let first = null
+  for (const [name, rule] of RULES){
+    const input = form.elements[name], field = input.closest('.field'), err = field.querySelector('.err')
+    const msg = rule(String(input.value || ''))
+    if (msg && (all || field.classList.contains('-bad'))){
+      field.classList.add('-bad'); input.setAttribute('aria-invalid', 'true')
+      err.textContent = msg; err.hidden = false
+      if (!first) first = input
+    } else if (!msg){
+      field.classList.remove('-bad'); input.removeAttribute('aria-invalid'); err.hidden = true
+    }
+  }
+  return first
+}
+form.addEventListener('input', e => { if (e.target.closest('.field.-bad')) check(false) })
+form.addEventListener('submit', e => {
+  e.preventDefault()
+  const first = check(true)
+  if (first){ status.textContent = ''; first.focus(); return }
+  status.textContent = 'Message ready to send. The form handler is connected at launch, so nothing has been transmitted yet.'
+})
+})()
+</script>
+</body>
+</html>
